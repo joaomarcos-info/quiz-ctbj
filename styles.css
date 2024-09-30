@@ -1,68 +1,113 @@
+/* Estilo para a página inicial */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    background-color: #f0f0f0;
+    color: #333;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    flex-direction: column;
 }
 
-.quiz-container {
-    background-color: white;
+header {
+    background-color: #003366;
+    color: white;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 600px;
-}
-
-h1 {
     text-align: center;
 }
 
-h2 {
-    font-size: 1.5rem;
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.options {
-    margin-top: 10px;
+.logo-ufpi {
+    max-width: 200px;
 }
 
-label {
-    font-size: 1rem;
-    margin-bottom: 5px;
-    display: block;
+.hero {
+    background-color: #f8f9fa;
+    padding: 40px 0;
+    text-align: center;
 }
 
-button {
-    background-color: #28a745;
+.hero h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.disciplinas {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.disciplinas-lista {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.disciplina-card {
+    background-color: #007bff;
     color: white;
-    border: none;
-    padding: 10px 20px;
+    padding: 20px;
+    text-decoration: none;
     border-radius: 5px;
-    cursor: pointer;
-    margin-top: 15px;
+    transition: background-color 0.3s;
 }
 
-button:hover {
+.disciplina-card:hover {
+    background-color: #0056b3;
+}
+
+footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+    margin-bottom: 0px;
+}
+
+
+/* Cores para cada disciplina */
+.sistemas-operacionais {
+    background-color: #28a745; /* Verde claro */
+}
+
+.desenvolvimento-web {
+    background-color: #007bff; /* Azul */
+}
+
+.projeto-integrador {
+    background-color: #6f42c1; /* Roxo */
+}
+
+.empreendedorismo {
+    background-color: #fd7e14; /* Laranja */
+}
+
+.engenharia-software {
+    background-color: #dc3545; /* Vermelho */
+}
+
+/* Efeito hover para as disciplinas */
+.sistemas-operacionais:hover {
     background-color: #218838;
 }
 
-#feedback {
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-#score-container {
-    text-align: center;
-}
-
-#restart-btn {
-    background-color: #007bff;
-}
-
-#restart-btn:hover {
+.desenvolvimento-web:hover {
     background-color: #0056b3;
+}
+
+.projeto-integrador:hover {
+    background-color: #5a2d91;
+}
+
+.empreendedorismo:hover {
+    background-color: #e4600f;
+}
+
+.engenharia-software:hover {
+    background-color: #c82333;
 }

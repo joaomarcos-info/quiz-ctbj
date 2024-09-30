@@ -1,49 +1,42 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz de Modelos de Desenvolvimento de Software</title>
+    <title>CTBJ - Sistema de Quizzes</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="quiz-container">
-        <h1>Quiz de Modelos de Desenvolvimento de Software</h1>
-        <div id="quiz">
-            <div id="question-container">
-                <h2 id="question">Pergunta aqui</h2>
-                <form id="quiz-form">
-                    <div class="options">
-                        <label>
-                            <input type="radio" name="option" value="A">
-                            <span id="optionA">Opção A</span>
-                        </label><br>
-                        <label>
-                            <input type="radio" name="option" value="B">
-                            <span id="optionB">Opção B</span>
-                        </label><br>
-                        <label>
-                            <input type="radio" name="option" value="C">
-                            <span id="optionC">Opção C</span>
-                        </label><br>
-                        <label>
-                            <input type="radio" name="option" value="D">
-                            <span id="optionD">Opção D</span>
-                        </label>
-                    </div>
-                    <button type="button" id="submit-btn">Confirmar</button>
-                </form>
-                <p id="feedback"></p>
-                <button id="next-btn" style="display: none;">Próxima Pergunta</button>
-            </div>
-            <div id="score-container" style="display: none;">
-                <h2>Quiz Completo!</h2>
-                <p id="score"></p>
-                <button id="restart-btn">Recomeçar Quiz</button>
-            </div>
+    <header>
+        <div class="logo-container">
+            <img src="https://ufpi.br/images/_logos/ufpi_marca_horizontal_completa.png" alt="Logo UFPI" class="logo-ufpi">
         </div>
-    </div>
+        <h1>Colégio Técnico de Bom Jesus</h1>
+        <h2>Universidade Federal do Piauí</h2>
+    </header>
 
-    <script src="script.js"></script>
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Bem-vindo ao Sistema de Quizzes do CTBJ</h2>
+            <p>Selecione uma das disciplinas abaixo para começar seu quiz.</p>
+        </div>
+    </section>
+
+    <section class="disciplinas">
+        <h3>Disciplinas</h3>
+        <div class="disciplinas-lista">
+            <a href="disciplina_sistemas_operacionais.html" class="disciplina-card sistemas-operacionais">Sistemas Operacionais</a>
+            <a href="disciplina_desenvolvimento_web.html" class="disciplina-card desenvolvimento-web">Desenvolvimento Web</a>
+            <a href="disciplina_projeto_integrador.html" class="disciplina-card projeto-integrador">Projeto Integrador I</a>
+            <a href="disciplina_empreendedorismo.html" class="disciplina-card empreendedorismo">Empreendedorismo</a>
+            <a href="disciplina_engenharia_software.html" class="disciplina-card engenharia-software">Engenharia de Software</a>
+        </div>
+    </section>
+    
+
+    
+    <footer>
+        <p>&copy; 2024 - Colégio Técnico de Bom Jesus (CTBJ) - UFPI</p>
+    </footer>
 </body>
 </html>
