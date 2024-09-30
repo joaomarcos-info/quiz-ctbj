@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Modelos de Desenvolvimento de Software</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Quiz de Modelos de Desenvolvimento de Software</h1>
+        <div id="quiz">
+            <div id="question-container">
+                <h2 id="question">Pergunta aqui</h2>
+                <form id="quiz-form">
+                    <div class="options">
+                        <label>
+                            <input type="radio" name="option" value="A">
+                            <span id="optionA">Opção A</span>
+                        </label><br>
+                        <label>
+                            <input type="radio" name="option" value="B">
+                            <span id="optionB">Opção B</span>
+                        </label><br>
+                        <label>
+                            <input type="radio" name="option" value="C">
+                            <span id="optionC">Opção C</span>
+                        </label><br>
+                        <label>
+                            <input type="radio" name="option" value="D">
+                            <span id="optionD">Opção D</span>
+                        </label>
+                    </div>
+                    <button type="button" id="submit-btn">Confirmar</button>
+                </form>
+                <p id="feedback"></p>
+                <button id="next-btn" style="display: none;">Próxima Pergunta</button>
+            </div>
+            <div id="score-container" style="display: none;">
+                <h2>Quiz Completo!</h2>
+                <p id="score"></p>
+                <button id="restart-btn">Recomeçar Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
