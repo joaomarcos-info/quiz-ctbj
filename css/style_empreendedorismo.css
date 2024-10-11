@@ -1,0 +1,17 @@
+
+body.empreendedorismo {
+    background-color: #fff4e7; 
+}
+
+.empreendedorismo h1 {
+    color: #fd7e14;
+}
+
+.empreendedorismo .conteudo-card {
+    background-color: #fd7e14;
+    color: white;
+}
+
+.empreendedorismo .conteudo-card:hover {
+    background-color: #e4600f; /
+}

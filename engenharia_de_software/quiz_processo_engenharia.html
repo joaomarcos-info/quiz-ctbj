@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTBJ - Quiz Processo de Engenharia de Requisitos</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../script.js" defer></script>
+    <style>
+        body {
+            background-color: #f8f8f8;
+        }
+        header, footer {
+            background-color: #d9534f; /* Cor igual aos botões */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .quiz-container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .options {
+            margin-bottom: 20px;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .feedback {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .score {
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #d9534f;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../img/logo_ufpi.png" alt="Logo UFPI" class="logo-ufpi">
+        </div>
+        <h1>Colégio Técnico de Bom Jesus</h1>
+        <h2>Universidade Federal do Piauí</h2>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Quiz: Processo de Engenharia de Requisitos</h2>
+        </div>
+    </section>
+
+    <section class="quiz-container">
+        <div id="quiz"></div>
+        <button id="action-btn" onclick="handleAction()">Confirmar Resposta</button>
+        <div id="score" class="score"></div>
+        <a href="../engenharia_de_software/disciplina_engenharia_software.html" class="back-btn">Voltar à Página Anterior</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 - Colégio Técnico de Bom Jesus (CTBJ) - UFPI</p>
+    </footer>
+
+    <script>
+        const quizData = [
+            {
+                question: "Qual é o principal objetivo do estudo de viabilidade no processo de engenharia de requisitos?",
+                options: [
+                    "Determinar se o projeto é tecnicamente e economicamente viável.",
+                    "Definir os requisitos do sistema.",
+                    "Desenvolver protótipos.",
+                    "Testar o sistema desenvolvido."
+                ],
+                correct: 0
+            },
+            {
+                question: "O que acontece durante o levantamento de requisitos?",
+                options: [
+                    "Os requisitos são implementados.",
+                    "Os requisitos são coletados dos stakeholders.",
+                    "O sistema é testado.",
+                    "A documentação do usuário é criada."
+                ],
+                correct: 1
+            },
+            {
+                question: "Quais são as atividades envolvidas na análise de requisitos?",
+                options: [
+                    "Coletar requisitos, validar requisitos e documentar requisitos.",
+                    "Projetar a arquitetura do sistema.",
+                    "Codificar o sistema.",
+                    "Manter o sistema."
+                ],
+                correct: 0
+            },
+            {
+                question: "Por que a validação de requisitos é importante?",
+                options: [
+                    "Para garantir que os requisitos estejam corretos e completos.",
+                    "Para criar o banco de dados do sistema.",
+                    "Para definir a arquitetura do sistema.",
+                    "Para implementar o código-fonte."
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual dos seguintes é um exemplo de requisito funcional?",
+                options: [
+                    "O sistema deve autenticar usuários antes do acesso.",
+                    "O sistema deve responder em menos de 2 segundos.",
+                    "O sistema deve ser compatível com dispositivos móveis.",
+                    "O sistema deve utilizar criptografia de senhas."
+                ],
+                correct: 0
+            },
+            {
+                question: "O que é gerenciamento de requisitos?",
+                options: [
+                    "Processo de controle de mudanças nos requisitos ao longo do ciclo de vida do projeto.",
+                    "Processo de implementação dos requisitos no sistema.",
+                    "Processo de documentação dos casos de teste.",
+                    "Processo de validação dos dados de entrada."
+                ],
+                correct: 0
+            },
+            {
+                question: "O que deve ser feito quando um requisito é considerado inviável?",
+                options: [
+                    "Ele deve ser modificado ou removido do escopo do projeto.",
+                    "Ele deve ser implementado mesmo assim.",
+                    "Ele deve ser ignorado.",
+                    "Ele deve ser atribuído a outro projeto."
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual a principal diferença entre requisitos funcionais e não funcionais?",
+                options: [
+                    "Requisitos funcionais descrevem o que o sistema faz, enquanto os não funcionais descrevem como o sistema deve se comportar.",
+                    "Requisitos funcionais definem a tecnologia usada, enquanto os não funcionais definem os usuários.",
+                    "Requisitos funcionais descrevem as interfaces, enquanto os não funcionais descrevem os dados.",
+                    "Requisitos funcionais descrevem o desempenho, enquanto os não funcionais descrevem a manutenção."
+                ],
+                correct: 0
+            },
+            {
+                question: "Durante qual fase ocorre a coleta de informações sobre o que o sistema deve fazer?",
+                options: [
+                    "Levantamento de requisitos.",
+                    "Implantação.",
+                    "Manutenção.",
+                    "Teste."
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual é o papel dos stakeholders no processo de engenharia de requisitos?",
+                options: [
+                    "Fornecer informações e feedback sobre os requisitos.",
+                    "Codificar os requisitos em linguagem de programação.",
+                    "Testar o sistema.",
+                    "Implantar o sistema em produção."
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual ferramenta pode ser usada para gerenciar requisitos?",
+                options: [
+                    "JIRA.",
+                    "Photoshop.",
+                    "AutoCAD.",
+                    "VLC Media Player."
+                ],
+                correct: 0
+            },
+            {
+                question: "Por que o estudo de viabilidade deve ser realizado antes do início do desenvolvimento?",
+                options: [
+                    "Para garantir que o projeto seja viável tecnicamente, economicamente e operacionalmente.",
+                    "Para garantir que os desenvolvedores estejam disponíveis.",
+                    "Para definir os casos de teste.",
+                    "Para treinar os usuários finais."
+                ],
+                correct: 0
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let isAnswered = false;
+
+        function loadQuestion() {
+            const questionContainer = document.getElementById('quiz');
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionContainer.innerHTML = `
+                <div class="question">${currentQuestion.question}</div>
+                <div class="options">
+                    ${currentQuestion.options.map((option, index) => `
+                        <label>
+                            <input type="radio" name="option" value="${index}"> ${option}
+                        </label>
+                    `).join('')}
+                </div>
+                <div id="feedback" class="feedback"></div>
+            `;
+            document.getElementById('action-btn').innerText = 'Confirmar Resposta';
+            isAnswered = false;
+        }
+
+        function handleAction() {
+            if (!isAnswered) {
+                checkAnswer();
+            } else {
+                nextQuestion();
+            }
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            const feedbackEl = document.getElementById('feedback');
+            if (selectedOption) {
+                const answer = parseInt(selectedOption.value);
+                if (answer === quizData[currentQuestionIndex].correct) {
+                    feedbackEl.innerText = 'Correto!';
+                    feedbackEl.style.color = 'green';
+                    score++;
+                } else {
+                    feedbackEl.innerText = `Errado! A resposta correta é: ${quizData[currentQuestionIndex].options[quizData[currentQuestionIndex].correct]}`;
+                    feedbackEl.style.color = 'red';
+                }
+                document.getElementById('action-btn').innerText = 'Próxima Questão';
+                isAnswered = true;
+            } else {
+                feedbackEl.innerText = 'Por favor, selecione uma resposta.';
+                feedbackEl.style.color = 'orange';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('action-btn').style.display = 'none';
+            document.getElementById('score').innerText = `Você acertou ${score} de ${quizData.length} perguntas!`;
+        }
+
+        window.onload = loadQuestion;
+    </script>
+</body>

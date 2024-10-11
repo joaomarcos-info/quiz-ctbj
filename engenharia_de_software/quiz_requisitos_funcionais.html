@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTBJ - Quiz Requisitos Funcionais e Não Funcionais</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../script.js" defer></script>
+    <style>
+        body {
+            background-color: #f8f8f8;
+        }
+        header, footer {
+            background-color: #d9534f; /* Cor igual aos botões */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .quiz-container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .options {
+            margin-bottom: 20px;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .feedback {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .score {
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #d9534f;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../img/logo_ufpi.png" alt="Logo UFPI" class="logo-ufpi">
+        </div>
+        <h1>Colégio Técnico de Bom Jesus</h1>
+        <h2>Universidade Federal do Piauí</h2>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Quiz: Requisitos Funcionais e Não Funcionais</h2>
+        </div>
+    </section>
+
+    <section class="quiz-container">
+        <div id="quiz"></div>
+        <button id="action-btn" onclick="handleAction()">Confirmar Resposta</button>
+        <div id="score" class="score"></div>
+        <a href="../engenharia_de_software/disciplina_engenharia_software.html" class="back-btn">Voltar à Página Anterior</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 - Colégio Técnico de Bom Jesus (CTBJ) - UFPI</p>
+    </footer>
+
+    <script>
+        const quizData = [
+            {
+                question: "O que são requisitos funcionais?",
+                options: [
+                    "Descrições das funcionalidades que o sistema deve ter.",
+                    "Requisitos relacionados ao desempenho do sistema.",
+                    "Restrições impostas pela legislação.",
+                    "Requisitos de manutenção."
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual das alternativas é um exemplo de requisito não funcional?",
+                options: [
+                    "Usuário deve ser capaz de criar uma conta.",
+                    "Sistema deve responder a comandos em menos de 2 segundos.",
+                    "Usuário pode deletar sua conta.",
+                    "Sistema deve permitir login através do Facebook."
+                ],
+                correct: 1
+            },
+            {
+                question: "Requisitos não funcionais descrevem...",
+                options: [
+                    "O que o sistema deve fazer.",
+                    "Como o sistema deve se comportar.",
+                    "Os usuários do sistema.",
+                    "Os concorrentes do sistema."
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual é um exemplo de requisito funcional?",
+                options: [
+                    "Usuário deve ser capaz de imprimir relatórios.",
+                    "Sistema deve ser compatível com dispositivos móveis.",
+                    "Sistema deve responder em até 3 segundos.",
+                    "Sistema deve utilizar criptografia para senhas."
+                ],
+                correct: 0
+            },
+            {
+                question: "Requisitos não funcionais incluem...",
+                options: [
+                    "Funcionalidades do sistema.",
+                    "Requisitos de segurança, desempenho e usabilidade.",
+                    "Funcionalidades para usuários administradores.",
+                    "Descrição de casos de uso."
+                ],
+                correct: 1
+            },
+            {
+                question: "O que são requisitos de usabilidade?",
+                options: [
+                    "Requisitos que definem como o sistema deve ser fácil de usar.",
+                    "Requisitos que definem o comportamento do sistema.",
+                    "Requisitos que especificam funcionalidades específicas.",
+                    "Requisitos legais e regulamentares."
+                ],
+                correct: 0
+            },
+            {
+                question: "Um requisito não funcional pode ser...",
+                options: [
+                    "Usuário deve poder cadastrar produtos.",
+                    "Sistema deve garantir uma disponibilidade de 99,9%.",
+                    "Usuário deve poder alterar sua senha.",
+                    "Usuário deve poder visualizar relatórios."
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual dos seguintes é um requisito de segurança?",
+                options: [
+                    "Sistema deve autenticar usuários antes do acesso.",
+                    "Sistema deve ter uma interface intuitiva.",
+                    "Usuário deve poder deletar registros.",
+                    "Sistema deve responder em menos de 1 segundo."
+                ],
+                correct: 0
+            },
+            {
+                question: "Requisitos de desempenho são considerados...",
+                options: [
+                    "Requisitos funcionais.",
+                    "Requisitos não funcionais.",
+                    "Requisitos de usuário.",
+                    "Requisitos de manutenção."
+                ],
+                correct: 1
+            },
+            {
+                question: "Requisitos de portabilidade definem...",
+                options: [
+                    "Como o sistema deve se comportar em diferentes dispositivos.",
+                    "Quais funcionalidades o sistema deve ter.",
+                    "Como o sistema deve ser testado.",
+                    "Como o sistema deve ser documentado."
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual das seguintes é uma característica de um requisito funcional?",
+                options: [
+                    "Define uma função específica que o sistema deve realizar.",
+                    "Define como o sistema deve ser seguro.",
+                    "Define o tempo de resposta do sistema.",
+                    "Define a compatibilidade com navegadores."
+                ],
+                correct: 0
+            },
+            {
+                question: "Requisitos de eficiência podem incluir...",
+                options: [
+                    "O uso de recursos, como memória e processamento.",
+                    "Funcionalidades que o sistema deve ter.",
+                    "Os diferentes usuários do sistema.",
+                    "A interface gráfica do usuário."
+                ],
+                correct: 0
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let isAnswered = false;
+
+        function loadQuestion() {
+            const questionContainer = document.getElementById('quiz');
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionContainer.innerHTML = `
+                <div class="question">${currentQuestion.question}</div>
+                <div class="options">
+                    ${currentQuestion.options.map((option, index) => `
+                        <label>
+                            <input type="radio" name="option" value="${index}"> ${option}
+                        </label>
+                    `).join('')}
+                </div>
+                <div id="feedback" class="feedback"></div>
+            `;
+            document.getElementById('action-btn').innerText = 'Confirmar Resposta';
+            isAnswered = false;
+        }
+
+        function handleAction() {
+            if (!isAnswered) {
+                checkAnswer();
+            } else {
+                nextQuestion();
+            }
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            const feedbackEl = document.getElementById('feedback');
+            if (selectedOption) {
+                const answer = parseInt(selectedOption.value);
+                if (answer === quizData[currentQuestionIndex].correct) {
+                    feedbackEl.innerText = 'Correto!';
+                    feedbackEl.style.color = 'green';
+                    score++;
+                } else {
+                    feedbackEl.innerText = `Errado! A resposta correta é: ${quizData[currentQuestionIndex].options[quizData[currentQuestionIndex].correct]}`;
+                    feedbackEl.style.color = 'red';
+                }
+                document.getElementById('action-btn').innerText = 'Próxima Questão';
+                isAnswered = true;
+            } else {
+                feedbackEl.innerText = 'Por favor, selecione uma resposta.';
+                feedbackEl.style.color = 'orange';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('action-btn').style.display = 'none';
+            document.getElementById('score').innerText = `Você acertou ${score} de ${quizData.length} perguntas!`;
+        }
+
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>
