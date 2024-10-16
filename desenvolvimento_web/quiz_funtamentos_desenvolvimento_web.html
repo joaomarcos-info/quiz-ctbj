@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTBJ - Quiz Desenvolvimento Web</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../script.js" defer></script>
+    <style>
+        body {
+            background-color: #f8f8f8;
+        }
+        header, footer {
+            background-color: #007bff; /* Cor igual aos botões de Empreendedorismo */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .quiz-container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .options {
+            margin-bottom: 20px;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .feedback {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .score {
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../img/logo_ufpi.png" alt="Logo UFPI" class="logo-ufpi">
+        </div>
+        <h1>Colégio Técnico de Bom Jesus</h1>
+        <h2>Universidade Federal do Piauí</h2>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Quiz: Fundamentos do Desenvolvimento Web</h2>
+        </div>
+    </section>
+
+    <section class="quiz-container">
+        <div id="quiz"></div>
+        <button id="action-btn" onclick="handleAction()">Confirmar Resposta</button>
+        <div id="score" class="score"></div>
+        <a href="disciplina_desenvolvimento_web.html" class="back-btn">Voltar à Página Anterior</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 - Colégio Técnico de Bom Jesus (CTBJ) - UFPI</p>
+    </footer>
+
+    <script>
+       
+
+
+       const quizData = [
+    {
+        question: "O que é HTML5?",
+        options: [
+            "A quinta versão da linguagem de marcação padrão para criação de páginas web.",
+            "Uma linguagem de programação para desenvolvimento de aplicativos móveis.",
+            "Um sistema operacional desenvolvido pelo W3C.",
+            "Uma ferramenta de design gráfico."
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual é a principal função do CSS3?",
+        options: [
+            "Definir a estrutura básica de uma página web.",
+            "Adicionar interatividade às páginas web.",
+            "Estilizar elementos escritos em HTML, como layout, cores e fontes.",
+            "Gerenciar bancos de dados relacionais."
+        ],
+        correct: 2
+    },
+    {
+        question: "Quem é considerado o criador do JavaScript?",
+        options: [
+            "Tim Berners-Lee",
+            "Brendan Eich",
+            "James Gosling",
+            "Linus Torvalds"
+        ],
+        correct: 1
+    },
+    {
+        question: "Qual a finalidade dos elementos semânticos introduzidos no HTML5, como < article > e < section >?",
+        options: [
+            "Melhorar a compreensão e a acessibilidade do conteúdo.",
+            "Definir estilos CSS personalizados.",
+            "Criar bancos de dados locais.",
+            "Adicionar efeitos de animação às páginas."
+        ],
+        correct: 0
+    },
+    {
+        question: "O que é o Flexbox no CSS3?",
+        options: [
+            "Um módulo para facilitar a criação de layouts flexíveis.",
+            "Uma biblioteca JavaScript.",
+            "Uma técnica para estilização de fontes.",
+            "Uma ferramenta para desenvolvimento backend."
+        ],
+        correct: 0
+    },
+    {
+        question: "O que significa a sigla HTML?",
+        options: [
+            "HyperText Markup Language",
+            "HyperTool Marketing Language",
+            "HighText Machine Language",
+            "HyperType Markup Library"
+        ],
+        correct: 0
+    },
+    {
+        question: "Em que ano o HTML5 foi padronizado?",
+        options: [
+            "1991",
+            "1997",
+            "2005",
+            "2014"
+        ],
+        correct: 3
+    },
+    {
+        question: "O que são Media Queries no CSS3?",
+        options: [
+            "Consultas para selecionar elementos no DOM.",
+            "Consultas para aplicar estilos com base no tamanho da tela.",
+            "Consultas SQL para banco de dados.",
+            "Ferramentas de depuração do navegador."
+        ],
+        correct: 1
+    },
+    {
+        question: "O que é ECMAScript?",
+        options: [
+            "Um padrão para o desenvolvimento do JavaScript.",
+            "Uma linguagem de marcação para páginas web.",
+            "Um tipo de layout no CSS.",
+            "Uma biblioteca para desenvolvimento de APIs."
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual das seguintes opções descreve o uso do <canvas> no HTML5?",
+        options: [
+            "Permitir desenho e animação de gráficos em 2D e 3D.",
+            "Adicionar estilos CSS às páginas.",
+            "Gerenciar a segurança do navegador.",
+            "Criar tabelas em uma página web."
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual é a principal função do JavaScript?",
+        options: [
+            "Adicionar interatividade e funcionalidades dinâmicas às páginas web.",
+            "Criar folhas de estilo para páginas.",
+            "Gerenciar bancos de dados SQL.",
+            "Formatar texto e parágrafos."
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual a importância dos seletores avançados no CSS3?",
+        options: [
+            "Permitir seleção específica de elementos para estilização detalhada.",
+            "Criar gráficos vetoriais escaláveis.",
+            "Adicionar comportamento dinâmico à página.",
+            "Aumentar a compatibilidade com navegadores antigos."
+        ],
+        correct: 0
+    },
+    {
+        question: "O que são pseudo-classes no CSS?",
+        options: [
+            "Classes usadas para definir animações complexas.",
+            "Classes usadas para definir estilos com base no estado de um elemento.",
+            "Classes que definem a estrutura HTML.",
+            "Classes que conectam o CSS ao JavaScript."
+        ],
+        correct: 1
+    },
+    {
+        question: "O que é a propriedade 'box-shadow' no CSS3?",
+        options: [
+            "Uma propriedade para adicionar sombra ao redor de elementos.",
+            "Uma ferramenta de depuração.",
+            "Um método de adicionar texto alternativo a imagens.",
+            "Uma função JavaScript para manipular sombras em vídeos."
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual elemento HTML5 é utilizado para definir vídeos em uma página web?",
+        options: [
+            "<video>",
+            "<img>",
+            "<media>",
+            "<iframe>"
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual é a principal vantagem do uso de Flexbox no CSS3?",
+        options: [
+            "Facilitar a criação de layouts que se ajustam automaticamente ao tamanho do container.",
+            "Permitir o uso de imagens vetoriais.",
+            "Adicionar efeitos de som.",
+            "Proporcionar animações 3D."
+        ],
+        correct: 0
+    },
+    {
+        question: "O que é JavaScript?",
+        options: [
+            "Uma linguagem de programação que permite adicionar interatividade ao site.",
+            "Uma ferramenta para criar imagens vetoriais.",
+            "Uma linguagem de formatação de documentos.",
+            "Um protocolo de comunicação de rede."
+        ],
+        correct: 0
+    },
+    {
+        question: "O que são eventos em JavaScript?",
+        options: [
+            "Ações que ocorrem na página, como cliques e movimentos do mouse, que podem ser usadas para disparar funções.",
+            "Funções que criam animações na página.",
+            "Variáveis que armazenam o estado do navegador.",
+            "Objetos usados para definir propriedades do CSS."
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual das seguintes alternativas é um exemplo de elemento semântico do HTML5?",
+        options: [
+            "<section>",
+            "<div>",
+            "<span>",
+            "<br>"
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual é o propósito dos elementos <header> e <footer> no HTML5?",
+        options: [
+            "Definir cabeçalho e rodapé de uma página para melhorar a estrutura e acessibilidade.",
+            "Adicionar interatividade à página.",
+            "Criar tabelas de dados.",
+            "Incorporar mídia interativa."
+        ],
+        correct: 0
+    }
+];
+
+
+
+
+
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let isAnswered = false;
+
+        function loadQuestion() {
+            const questionContainer = document.getElementById('quiz');
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionContainer.innerHTML = `
+                <div class="question">${currentQuestion.question}</div>
+                <div class="options">
+                    ${currentQuestion.options.map((option, index) => `
+                        <label>
+                            <input type="radio" name="option" value="${index}"> ${option}
+                        </label>
+                    `).join('')}
+                </div>
+                <div id="feedback" class="feedback"></div>
+            `;
+            document.getElementById('action-btn').innerText = 'Confirmar Resposta';
+            isAnswered = false;
+        }
+
+        function handleAction() {
+            if (!isAnswered) {
+                checkAnswer();
+            } else {
+                nextQuestion();
+            }
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            const feedbackEl = document.getElementById('feedback');
+            if (selectedOption) {
+                const answer = parseInt(selectedOption.value);
+                if (answer === quizData[currentQuestionIndex].correct) {
+                    feedbackEl.innerText = 'Correto!';
+                    feedbackEl.style.color = 'green';
+                    score++;
+                } else {
+                    feedbackEl.innerText = `Errado! A resposta correta é: ${quizData[currentQuestionIndex].options[quizData[currentQuestionIndex].correct]}`;
+                    feedbackEl.style.color = 'red';
+                }
+                document.getElementById('action-btn').innerText = 'Próxima Questão';
+                isAnswered = true;
+            } else {
+                feedbackEl.innerText = 'Por favor, selecione uma resposta.';
+                feedbackEl.style.color = 'orange';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('action-btn').style.display = 'none';
+            document.getElementById('score').innerText = `Você acertou ${score} de ${quizData.length} perguntas!`;
+        }
+
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>

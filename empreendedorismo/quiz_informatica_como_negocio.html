@@ -1,0 +1,291 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTBJ - Quiz Empreendedorismo</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../script.js" defer></script>
+    <style>
+        body {
+            background-color: #f8f8f8;
+        }
+        header, footer {
+            background-color: #e7740f; /* Cor igual aos botões de Empreendedorismo */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .quiz-container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .options {
+            margin-bottom: 20px;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .feedback {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .score {
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #e7740f;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../img/logo_ufpi.png" alt="Logo UFPI" class="logo-ufpi">
+        </div>
+        <h1>Colégio Técnico de Bom Jesus</h1>
+        <h2>Universidade Federal do Piauí</h2>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Quiz: Informática como um Negócio</h2>
+        </div>
+    </section>
+
+    <section class="quiz-container">
+        <div id="quiz"></div>
+        <button id="action-btn" onclick="handleAction()">Confirmar Resposta</button>
+        <div id="score" class="score"></div>
+        <a href="disciplina_empreendedorismo.html" class="back-btn">Voltar à Página Anterior</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 - Colégio Técnico de Bom Jesus (CTBJ) - UFPI</p>
+    </footer>
+
+    <script>
+       
+
+
+       const quizData = [
+    {
+        question: "O que é uma oportunidade de negócio na área de TI?",
+        options: [
+            "Criação de novas soluções em tecnologia para atender necessidades específicas.",
+            "Elaboração de campanhas de marketing digital.",
+            "Planejamento de logística de transporte.",
+            "Redução de custos operacionais em indústrias tradicionais."
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual das seguintes opções é um exemplo de uma oportunidade de negócio em cibersegurança?",
+        options: [
+            "Desenvolver uma plataforma de jogos.",
+            "Oferecer soluções de proteção contra malware e ataques cibernéticos.",
+            "Criar um novo software de edição de vídeo.",
+            "Gerenciar uma loja de roupas online."
+        ],
+        correct: 1
+    },
+    {
+        question: "Qual empresa é um exemplo de sucesso no setor de computação em nuvem?",
+        options: [
+            "Salesforce",
+            "Microsoft Azure",
+            "Oracle",
+            "Spotify"
+        ],
+        correct: 1
+    },
+    {
+        question: "Por que a computação em nuvem é considerada uma grande oportunidade de negócio?",
+        options: [
+            "Porque permite que as empresas armazenem e acessem dados em qualquer lugar, sem a necessidade de infraestrutura física.",
+            "Porque é uma maneira de reduzir custos com a produção de hardware.",
+            "Porque é usada exclusivamente para armazenamento de músicas.",
+            "Porque reduz a necessidade de contratar desenvolvedores de software."
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual dos exemplos a seguir representa uma aplicação da IoT (Internet das Coisas)?",
+        options: [
+            "Automação de uma linha de produção.",
+            "Monitoramento de dispositivos médicos em tempo real.",
+            "Criação de um novo site institucional.",
+            "Gerenciamento de campanhas publicitárias."
+        ],
+        correct: 1
+    },
+    {
+        question: "Qual é um dos exemplos de empresas de sucesso no setor de informática mencionados?",
+        options: [
+            "Google Cloud",
+            "WhatsApp",
+            "Facebook",
+            "Instagram"
+        ],
+        correct: 0
+    },
+    {
+        question: "O que é desenvolvimento de software personalizado?",
+        options: [
+            "Desenvolvimento de soluções específicas para atender às necessidades exclusivas de empresas.",
+            "Criação de software de código aberto para a comunidade.",
+            "Elaboração de projetos de hardware para empresas.",
+            "Desenvolvimento de aplicativos exclusivamente para Android."
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual empresa é pioneira no modelo de Software como Serviço (SaaS)?",
+        options: [
+            "Salesforce",
+            "IBM",
+            "Netflix",
+            "Apple"
+        ],
+        correct: 0
+    },
+    {
+        question: "Quais são algumas das áreas que a inteligência artificial (IA) pode ser aplicada?",
+        options: [
+            "Automação de tarefas repetitivas e análise preditiva.",
+            "Criação de conteúdo de entretenimento.",
+            "Transporte e logística apenas.",
+            "Educação física."
+        ],
+        correct: 0
+    },
+    {
+        question: "Por que o desenvolvimento de aplicativos mobile continua a ser uma grande oportunidade de negócio?",
+        options: [
+            "Porque o número de usuários de smartphones está em constante crescimento.",
+            "Porque os computadores pessoais estão se tornando obsoletos.",
+            "Porque os aplicativos não exigem manutenção.",
+            "Porque é uma maneira fácil de ganhar dinheiro rápido."
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual tecnologia está sendo utilizada para criar transações financeiras mais seguras e transparentes?",
+        options: [
+            "Blockchain",
+            "PHP",
+            "Excel",
+            "HTML"
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual é uma característica importante do setor de TI no contexto de oportunidades de negócio?",
+        options: [
+            "É um setor em constante evolução, impulsionado por inovações tecnológicas.",
+            "É um setor com baixo investimento inicial e baixo risco.",
+            "É voltado exclusivamente para grandes empresas.",
+            "Não oferece oportunidades de crescimento no longo prazo."
+        ],
+        correct: 0
+    }
+];
+
+
+
+
+
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let isAnswered = false;
+
+        function loadQuestion() {
+            const questionContainer = document.getElementById('quiz');
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionContainer.innerHTML = `
+                <div class="question">${currentQuestion.question}</div>
+                <div class="options">
+                    ${currentQuestion.options.map((option, index) => `
+                        <label>
+                            <input type="radio" name="option" value="${index}"> ${option}
+                        </label>
+                    `).join('')}
+                </div>
+                <div id="feedback" class="feedback"></div>
+            `;
+            document.getElementById('action-btn').innerText = 'Confirmar Resposta';
+            isAnswered = false;
+        }
+
+        function handleAction() {
+            if (!isAnswered) {
+                checkAnswer();
+            } else {
+                nextQuestion();
+            }
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            const feedbackEl = document.getElementById('feedback');
+            if (selectedOption) {
+                const answer = parseInt(selectedOption.value);
+                if (answer === quizData[currentQuestionIndex].correct) {
+                    feedbackEl.innerText = 'Correto!';
+                    feedbackEl.style.color = 'green';
+                    score++;
+                } else {
+                    feedbackEl.innerText = `Errado! A resposta correta é: ${quizData[currentQuestionIndex].options[quizData[currentQuestionIndex].correct]}`;
+                    feedbackEl.style.color = 'red';
+                }
+                document.getElementById('action-btn').innerText = 'Próxima Questão';
+                isAnswered = true;
+            } else {
+                feedbackEl.innerText = 'Por favor, selecione uma resposta.';
+                feedbackEl.style.color = 'orange';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('action-btn').style.display = 'none';
+            document.getElementById('score').innerText = `Você acertou ${score} de ${quizData.length} perguntas!`;
+        }
+
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>

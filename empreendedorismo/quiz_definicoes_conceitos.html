@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTBJ - Quiz Empreendedorismo</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../script.js" defer></script>
+    <style>
+        body {
+            background-color: #f8f8f8;
+        }
+        header, footer {
+            background-color: #e7740f; /* Cor igual aos botões de Empreendedorismo */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .quiz-container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .options {
+            margin-bottom: 20px;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .feedback {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .score {
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #e7740f;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../img/logo_ufpi.png" alt="Logo UFPI" class="logo-ufpi">
+        </div>
+        <h1>Colégio Técnico de Bom Jesus</h1>
+        <h2>Universidade Federal do Piauí</h2>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Quiz: Empreendedorismo</h2>
+        </div>
+    </section>
+
+    <section class="quiz-container">
+        <div id="quiz"></div>
+        <button id="action-btn" onclick="handleAction()">Confirmar Resposta</button>
+        <div id="score" class="score"></div>
+        <a href="disciplina_empreendedorismo.html" class="back-btn">Voltar à Página Anterior</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 - Colégio Técnico de Bom Jesus (CTBJ) - UFPI</p>
+    </footer>
+
+    <script>
+        const quizData = [
+            {
+                question: "O que é empreendedorismo?",
+                options: [
+                    "Ação de criar e desenvolver novos negócios.",
+                    "Processo de testar um software antes do lançamento.",
+                    "Ação de reduzir custos em uma empresa.",
+                    "Planejamento financeiro de uma organização."
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual a principal característica de um empreendedor?",
+                options: [
+                    "Aversão ao risco.",
+                    "Criatividade e inovação.",
+                    "Passividade diante de problemas.",
+                    "Desinteresse por mudanças."
+                ],
+                correct: 1
+            },
+            {
+                question: "O que é um plano de negócios?",
+                options: [
+                    "Documento que descreve os objetivos de um negócio e as estratégias para alcançá-los.",
+                    "Lista de produtos a serem vendidos.",
+                    "Manual de instruções para operações diárias.",
+                    "Plano de redução de custos."
+                ],
+                correct: 0
+            },
+            {
+                question: "O que é empreendedorismo social?",
+                options: [
+                    "Empreendimento com foco em lucro acima de tudo.",
+                    "Criação de soluções para problemas sociais.",
+                    "Desenvolvimento de tecnologias para empresas privadas.",
+                    "Comércio de produtos eletrônicos."
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual o papel do benchmarking no empreendedorismo?",
+                options: [
+                    "Comparar as práticas da sua empresa com as de outras para melhorar processos.",
+                    "Planejar a compra de equipamentos.",
+                    "Reduzir os custos de produção.",
+                    "Aumentar os preços de produtos e serviços."
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual é a importância da gestão no empreendedorismo?",
+                options: [
+                    "Gerir eficientemente os recursos e garantir o sucesso do negócio.",
+                    "Reduzir o número de empregados.",
+                    "Aumentar os impostos pagos pela empresa.",
+                    "Eliminar qualquer tipo de concorrência."
+                ],
+                correct: 0
+            },
+            {
+                question: "O que define o perfil de um empreendedor de sucesso?",
+                options: [
+                    "Resiliência, proatividade e capacidade de lidar com riscos.",
+                    "Passividade, conformismo e falta de planejamento.",
+                    "Aversão ao risco e medo de mudanças.",
+                    "Foco apenas em lucro, sem considerar impactos sociais."
+                ],
+                correct: 0
+            },
+            {
+                question: "O que é ciclo de vida de uma empresa?",
+                options: [
+                    "Fases pelas quais uma empresa passa, desde a criação até sua consolidação ou falência.",
+                    "Processo de contratação de empregados.",
+                    "Elaboração de um plano financeiro.",
+                    "Processo de venda de ações no mercado."
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual é a finalidade de um estudo de viabilidade?",
+                options: [
+                    "Analisar se um negócio é viável antes de investir recursos.",
+                    "Verificar a qualidade dos produtos.",
+                    "Definir as cores do logotipo da empresa.",
+                    "Elaborar a lista de fornecedores."
+                ],
+                correct: 0
+            },
+            {
+                question: "O que são metas empresariais?",
+                options: [
+                    "Objetivos específicos que a empresa deseja atingir em um período determinado.",
+                    "Lista de empregados que devem ser promovidos.",
+                    "Definição de novos produtos.",
+                    "Objetivos financeiros para reduzir custos."
+                ],
+                correct: 0
+            },
+            {
+                question: "O que é uma oportunidade de negócio?",
+                options: [
+                    "Situação favorável para criar algo novo e gerar valor.",
+                    "Compra de novos equipamentos para a empresa.",
+                    "Elaboração de um plano de redução de custos.",
+                    "Fechamento de uma parceria com outra empresa."
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual a diferença entre empreendedorismo e empresário?",
+                options: [
+                    "Empreendedor é aquele que identifica oportunidades, enquanto o empresário gerencia o negócio criado.",
+                    "Empreendedor foca apenas em lucro, enquanto o empresário foca em pessoas.",
+                    "Empreendedor é o funcionário da empresa e empresário é o dono.",
+                    "Não há diferença entre os dois termos."
+                ],
+                correct: 0
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let isAnswered = false;
+
+        function loadQuestion() {
+            const questionContainer = document.getElementById('quiz');
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionContainer.innerHTML = `
+                <div class="question">${currentQuestion.question}</div>
+                <div class="options">
+                    ${currentQuestion.options.map((option, index) => `
+                        <label>
+                            <input type="radio" name="option" value="${index}"> ${option}
+                        </label>
+                    `).join('')}
+                </div>
+                <div id="feedback" class="feedback"></div>
+            `;
+            document.getElementById('action-btn').innerText = 'Confirmar Resposta';
+            isAnswered = false;
+        }
+
+        function handleAction() {
+            if (!isAnswered) {
+                checkAnswer();
+            } else {
+                nextQuestion();
+            }
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            const feedbackEl = document.getElementById('feedback');
+            if (selectedOption) {
+                const answer = parseInt(selectedOption.value);
+                if (answer === quizData[currentQuestionIndex].correct) {
+                    feedbackEl.innerText = 'Correto!';
+                    feedbackEl.style.color = 'green';
+                    score++;
+                } else {
+                    feedbackEl.innerText = `Errado! A resposta correta é: ${quizData[currentQuestionIndex].options[quizData[currentQuestionIndex].correct]}`;
+                    feedbackEl.style.color = 'red';
+                }
+                document.getElementById('action-btn').innerText = 'Próxima Questão';
+                isAnswered = true;
+            } else {
+                feedbackEl.innerText = 'Por favor, selecione uma resposta.';
+                feedbackEl.style.color = 'orange';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('action-btn').style.display = 'none';
+            document.getElementById('score').innerText = `Você acertou ${score} de ${quizData.length} perguntas!`;
+        }
+
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>

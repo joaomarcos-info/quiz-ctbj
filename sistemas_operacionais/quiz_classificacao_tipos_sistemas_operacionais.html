@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTBJ - Sistemas Operacionais</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../script.js" defer></script>
+    <style>
+        body {
+            background-color: #f8f8f8;
+        }
+        header, footer {
+            background-color: #28a745; /* Cor igual aos botões de Empreendedorismo */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .quiz-container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .options {
+            margin-bottom: 20px;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .feedback {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .score {
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../img/logo_ufpi.png" alt="Logo UFPI" class="logo-ufpi">
+        </div>
+        <h1>Colégio Técnico de Bom Jesus</h1>
+        <h2>Universidade Federal do Piauí</h2>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Quiz: Classificação e Tipos dos Sistemas Operacionais</h2>
+        </div>
+    </section>
+
+    <section class="quiz-container">
+        <div id="quiz"></div>
+        <button id="action-btn" onclick="handleAction()">Confirmar Resposta</button>
+        <div id="score" class="score"></div>
+        <a href="disciplina_sistemas_operacionais.html" class="back-btn">Voltar à Página Anterior</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 - Colégio Técnico de Bom Jesus (CTBJ) - UFPI</p>
+    </footer>
+
+    <script>
+       
+       const quizData = [
+    {
+        question: "O que significa multitarefa em um sistema operacional?",
+        options: [
+            "A habilidade de conectar múltiplos monitores.",
+            "A capacidade de executar múltiplos processos ao mesmo tempo.",
+            "A capacidade de armazenar arquivos na nuvem.",
+            "A função de criar redes locais."
+        ],
+        correct: 1
+    },
+    {
+        question: "O que é um sistema monousuário?",
+        options: [
+            "Um sistema que permite apenas um usuário por vez.",
+            "Um sistema especializado para aplicações científicas.",
+            "Um sistema que suporta múltiplos usuários simultaneamente.",
+            "Um sistema que é usado apenas em servidores."
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual é a principal característica de um sistema multiusuário?",
+        options: [
+            "Ser usado somente para tarefas monoprogramáveis.",
+            "Permitir que vários usuários usem o sistema ao mesmo tempo.",
+            "Não possuir interface gráfica.",
+            "Ser compatível apenas com um dispositivo específico."
+        ],
+        correct: 1
+    },
+    {
+        question: "O que diferencia um sistema monoprogramável de um multiprogramável?",
+        options: [
+            "Sistemas multiprogramáveis são usados apenas em dispositivos móveis.",
+            "Sistemas monoprogramáveis só executam um programa por vez, enquanto sistemas multiprogramáveis podem executar vários programas simultaneamente.",
+            "Sistemas monoprogramáveis são mais rápidos.",
+            "Sistemas monoprogramáveis são usados em servidores."
+        ],
+        correct: 1
+    },
+    {
+        question: "Qual é a principal vantagem dos sistemas multiprogramáveis?",
+        options: [
+            "Eles são mais lentos que sistemas monoprogramáveis.",
+            "Eles são usados apenas em sistemas embarcados.",
+            "Eles permitem que múltiplos programas sejam executados simultaneamente, aumentando a eficiência do uso da CPU.",
+            "Eles não precisam de memória."
+        ],
+        correct: 2
+    },
+    {
+        question: "O que é um sistema operacional de tempo real?",
+        options: [
+            "Um sistema operacional de uso geral.",
+            "Um sistema usado apenas para edição de textos.",
+            "Um sistema que deve processar dados em um tempo garantido para controlar eventos do mundo real.",
+            "Um sistema que não possui interface gráfica."
+        ],
+        correct: 2
+    },
+    {
+        question: "Qual é uma característica de sistemas distribuídos?",
+        options: [
+            "Eles são sistemas monousuário.",
+            "Eles são usados apenas em dispositivos móveis.",
+            "Eles não possuem rede de comunicação.",
+            "Eles utilizam vários computadores para resolver um problema em comum."
+        ],
+        correct: 3
+    },
+    {
+        question: "O que são sistemas embarcados?",
+        options: [
+            "Sistemas utilizados exclusivamente em servidores.",
+            "Sistemas que estão embutidos em dispositivos eletrônicos para realizar funções específicas.",
+            "Sistemas operacionais de uso geral.",
+            "Sistemas usados apenas em computadores desktop."
+        ],
+        correct: 1
+    },
+    {
+        question: "Qual a principal aplicação de um sistema de tempo real?",
+        options: [
+            "Criar apresentações em slides.",
+            "Executar jogos de alta performance.",
+            "Editar fotos e vídeos.",
+            "Controlar dispositivos que requerem respostas rápidas e precisas, como sistemas industriais e médicos."
+        ],
+        correct: 3
+    },
+    {
+        question: "Qual a principal diferença entre sistemas monousuário e multiusuário?",
+        options: [
+            "Sistemas monousuário permitem apenas um usuário por vez, enquanto sistemas multiusuário permitem múltiplos usuários simultaneamente.",
+            "Sistemas multiusuário não têm interface gráfica.",
+            "Sistemas monousuário são usados apenas em dispositivos móveis.",
+            "Sistemas monousuário são mais caros."
+        ],
+        correct: 0
+    }
+];
+
+
+
+
+
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let isAnswered = false;
+
+        function loadQuestion() {
+            const questionContainer = document.getElementById('quiz');
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionContainer.innerHTML = `
+                <div class="question">${currentQuestion.question}</div>
+                <div class="options">
+                    ${currentQuestion.options.map((option, index) => `
+                        <label>
+                            <input type="radio" name="option" value="${index}"> ${option}
+                        </label>
+                    `).join('')}
+                </div>
+                <div id="feedback" class="feedback"></div>
+            `;
+            document.getElementById('action-btn').innerText = 'Confirmar Resposta';
+            isAnswered = false;
+        }
+
+        function handleAction() {
+            if (!isAnswered) {
+                checkAnswer();
+            } else {
+                nextQuestion();
+            }
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            const feedbackEl = document.getElementById('feedback');
+            if (selectedOption) {
+                const answer = parseInt(selectedOption.value);
+                if (answer === quizData[currentQuestionIndex].correct) {
+                    feedbackEl.innerText = 'Correto!';
+                    feedbackEl.style.color = 'green';
+                    score++;
+                } else {
+                    feedbackEl.innerText = `Errado! A resposta correta é: ${quizData[currentQuestionIndex].options[quizData[currentQuestionIndex].correct]}`;
+                    feedbackEl.style.color = 'red';
+                }
+                document.getElementById('action-btn').innerText = 'Próxima Questão';
+                isAnswered = true;
+            } else {
+                feedbackEl.innerText = 'Por favor, selecione uma resposta.';
+                feedbackEl.style.color = 'orange';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('action-btn').style.display = 'none';
+            document.getElementById('score').innerText = `Você acertou ${score} de ${quizData.length} perguntas!`;
+        }
+
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>

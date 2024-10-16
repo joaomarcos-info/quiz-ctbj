@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTBJ - Sistemas Operacionais</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../script.js" defer></script>
+    <style>
+        body {
+            background-color: #f8f8f8;
+        }
+        header, footer {
+            background-color: #28a745; /* Cor igual aos botões de Empreendedorismo */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .quiz-container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .options {
+            margin-bottom: 20px;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .feedback {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .score {
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../img/logo_ufpi.png" alt="Logo UFPI" class="logo-ufpi">
+        </div>
+        <h1>Colégio Técnico de Bom Jesus</h1>
+        <h2>Universidade Federal do Piauí</h2>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Quiz: Conceitos Fundamentais do Sistemas Operacionais</h2>
+        </div>
+    </section>
+
+    <section class="quiz-container">
+        <div id="quiz"></div>
+        <button id="action-btn" onclick="handleAction()">Confirmar Resposta</button>
+        <div id="score" class="score"></div>
+        <a href="disciplina_sistemas_operacionais.html" class="back-btn">Voltar à Página Anterior</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 - Colégio Técnico de Bom Jesus (CTBJ) - UFPI</p>
+    </footer>
+
+    <script>
+       
+
+       const quizData = [
+    {
+        question: "O que é um sistema operacional?",
+        options: [
+            "Um programa de edição de textos.",
+            "Um software que controla o hardware e gerencia recursos de sistema.",
+            "Uma linguagem de programação.",
+            "Um aplicativo de música."
+        ],
+        correct: 1
+    },
+    {
+        question: "Qual dos seguintes é um componente principal de um sistema operacional?",
+        options: [
+            "Microsoft Word",
+            "Kernel",
+            "Navegador de Internet",
+            "Editor de imagens"
+        ],
+        correct: 1
+    },
+    {
+        question: "O que é o kernel em um sistema operacional?",
+        options: [
+            "Um software de edição de vídeo.",
+            "A parte principal que gerencia o hardware e os recursos do sistema.",
+            "Um programa antivírus.",
+            "Uma interface gráfica para usuários."
+        ],
+        correct: 1
+    },
+    {
+        question: "Qual o papel do gerenciador de recursos em um sistema operacional?",
+        options: [
+            "Editar documentos de texto.",
+            "Distribuir os recursos do sistema, como CPU, memória e dispositivos de I/O.",
+            "Reproduzir músicas e vídeos.",
+            "Enviar e-mails para outros usuários."
+        ],
+        correct: 1
+    },
+    {
+        question: "O que é uma interface de usuário em um sistema operacional?",
+        options: [
+            "Um software para editar fotos.",
+            "Uma ferramenta para programar em Java.",
+            "A parte que permite aos usuários interagirem com o sistema operacional.",
+            "Um dispositivo de hardware para conectar periféricos."
+        ],
+        correct: 2
+    },
+    {
+        question: "Qual é a principal função do kernel?",
+        options: [
+            "Gerar gráficos para jogos.",
+            "Controlar a reprodução de músicas.",
+            "Gerenciar o hardware do sistema, como CPU e memória.",
+            "Realizar backups de arquivos."
+        ],
+        correct: 2
+    },
+    {
+        question: "O que é um gerenciador de dispositivos em um sistema operacional?",
+        options: [
+            "Um programa de reprodução de mídia.",
+            "Um software para escrever códigos em Python.",
+            "Um jogo de computador.",
+            "Uma parte do sistema responsável por controlar periféricos, como impressoras e discos rígidos."
+        ],
+        correct: 3
+    },
+    {
+        question: "Qual componente do sistema operacional é responsável por gerenciar a memória?",
+        options: [
+            "Gerenciador de rede",
+            "Interface de usuário",
+            "Kernel",
+            "Gerenciador de memória"
+        ],
+        correct: 3
+    },
+    {
+        question: "Como a interface de usuário facilita o uso de um sistema operacional?",
+        options: [
+            "Criando gráficos para jogos.",
+            "Fornecendo uma maneira amigável para os usuários interagirem com o sistema.",
+            "Desenvolvendo aplicativos móveis.",
+            "Gerenciando diretamente o hardware do sistema."
+        ],
+        correct: 1
+    },
+    {
+        question: "O que é uma interface gráfica de usuário (GUI)?",
+        options: [
+            "Um tipo de hardware que conecta o computador a outros dispositivos.",
+            "Uma interface que só pode ser usada através de comandos de texto.",
+            "Uma interface que permite aos usuários interagir com o sistema através de elementos visuais, como ícones e janelas.",
+            "Um sistema operacional específico para servidores."
+        ],
+        correct: 2
+    },
+    {
+        question: "Qual a função do gerenciador de processos?",
+        options: [
+            "Gerenciar redes e conexões de internet.",
+            "Editar vídeos e fotos.",
+            "Criar documentos de texto.",
+            "Gerenciar a execução de programas e alocar recursos da CPU."
+        ],
+        correct: 3
+    },
+    {
+        question: "O que significa multitarefa em um sistema operacional?",
+        options: [
+            "A função de criar redes locais.",
+            "A capacidade de executar múltiplos processos ao mesmo tempo.",
+            "A habilidade de conectar múltiplos monitores.",
+            "A capacidade de armazenar arquivos na nuvem."
+        ],
+        correct: 1
+    }
+];
+
+
+
+
+
+
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let isAnswered = false;
+
+        function loadQuestion() {
+            const questionContainer = document.getElementById('quiz');
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionContainer.innerHTML = `
+                <div class="question">${currentQuestion.question}</div>
+                <div class="options">
+                    ${currentQuestion.options.map((option, index) => `
+                        <label>
+                            <input type="radio" name="option" value="${index}"> ${option}
+                        </label>
+                    `).join('')}
+                </div>
+                <div id="feedback" class="feedback"></div>
+            `;
+            document.getElementById('action-btn').innerText = 'Confirmar Resposta';
+            isAnswered = false;
+        }
+
+        function handleAction() {
+            if (!isAnswered) {
+                checkAnswer();
+            } else {
+                nextQuestion();
+            }
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            const feedbackEl = document.getElementById('feedback');
+            if (selectedOption) {
+                const answer = parseInt(selectedOption.value);
+                if (answer === quizData[currentQuestionIndex].correct) {
+                    feedbackEl.innerText = 'Correto!';
+                    feedbackEl.style.color = 'green';
+                    score++;
+                } else {
+                    feedbackEl.innerText = `Errado! A resposta correta é: ${quizData[currentQuestionIndex].options[quizData[currentQuestionIndex].correct]}`;
+                    feedbackEl.style.color = 'red';
+                }
+                document.getElementById('action-btn').innerText = 'Próxima Questão';
+                isAnswered = true;
+            } else {
+                feedbackEl.innerText = 'Por favor, selecione uma resposta.';
+                feedbackEl.style.color = 'orange';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('action-btn').style.display = 'none';
+            document.getElementById('score').innerText = `Você acertou ${score} de ${quizData.length} perguntas!`;
+        }
+
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>

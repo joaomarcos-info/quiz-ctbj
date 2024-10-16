@@ -1,0 +1,291 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTBJ - Quiz Empreendedorismo</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../script.js" defer></script>
+    <style>
+        body {
+            background-color: #f8f8f8;
+        }
+        header, footer {
+            background-color: #e7740f; /* Cor igual aos botões de Empreendedorismo */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .quiz-container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .options {
+            margin-bottom: 20px;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .feedback {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .score {
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #e7740f;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../img/logo_ufpi.png" alt="Logo UFPI" class="logo-ufpi">
+        </div>
+        <h1>Colégio Técnico de Bom Jesus</h1>
+        <h2>Universidade Federal do Piauí</h2>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Quiz: Benchmarking</h2>
+        </div>
+    </section>
+
+    <section class="quiz-container">
+        <div id="quiz"></div>
+        <button id="action-btn" onclick="handleAction()">Confirmar Resposta</button>
+        <div id="score" class="score"></div>
+        <a href="disciplina_empreendedorismo.html" class="back-btn">Voltar à Página Anterior</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 - Colégio Técnico de Bom Jesus (CTBJ) - UFPI</p>
+    </footer>
+
+    <script>
+       
+
+       const quizData = [
+    {
+        question: "O que é benchmarking?",
+        options: [
+            "Um processo contínuo de medir produtos, serviços e práticas de uma empresa em relação às melhores práticas de outras.",
+            "Uma técnica para reduzir custos de produção.",
+            "Um método para contratar novos funcionários.",
+            "Um sistema de avaliação de desempenho individual."
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual é o objetivo principal do benchmarking?",
+        options: [
+            "Copiar as melhores práticas de concorrentes.",
+            "Melhorar a qualidade, eficiência e competitividade da organização.",
+            "Reduzir a quantidade de produtos oferecidos.",
+            "Eliminar a concorrência direta."
+        ],
+        correct: 1
+    },
+    {
+        question: "O que é benchmarking interno?",
+        options: [
+            "Comparação entre empresas concorrentes.",
+            "Comparação de processos entre diferentes departamentos de uma mesma empresa.",
+            "Comparação de produtos entre diferentes mercados.",
+            "Avaliação do desempenho financeiro da empresa."
+        ],
+        correct: 1
+    },
+    {
+        question: "Qual é um exemplo de benchmarking competitivo?",
+        options: [
+            "Comparar as práticas de desenvolvimento de software de uma startup com as de uma concorrente maior.",
+            "Comparar o desempenho financeiro com empresas de outros setores.",
+            "Avaliar a satisfação dos funcionários.",
+            "Definir metas de curto prazo."
+        ],
+        correct: 0
+    },
+    {
+        question: "Por que o benchmarking é importante para startups de TI?",
+        options: [
+            "Para copiar todas as práticas de outras empresas.",
+            "Para identificar práticas eficientes e melhorar os processos internos.",
+            "Para reduzir o número de funcionários.",
+            "Para aumentar o custo de aquisição de clientes."
+        ],
+        correct: 1
+    },
+    {
+        question: "O que é benchmarking de desenvolvimento ágil?",
+        options: [
+            "Comparação do uso de práticas ágeis, como Scrum ou Kanban, entre diferentes empresas.",
+            "Definição de metas para redução de custos.",
+            "Contratação de desenvolvedores para aumentar a equipe.",
+            "Avaliação do desempenho financeiro de projetos ágeis."
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual é a importância da etapa de análise no processo de benchmarking?",
+        options: [
+            "Analisar os dados coletados para identificar as melhores práticas que podem ser adaptadas.",
+            "Definir um novo produto para a empresa.",
+            "Realizar um teste de mercado para lançamento de um serviço.",
+            "Contratar novos funcionários."
+        ],
+        correct: 0
+    },
+    {
+        question: "O que é benchmarking de marketing digital?",
+        options: [
+            "Comparar as estratégias de marketing digital com startups de referência no setor de tecnologia.",
+            "Desenvolver um plano de marketing do zero.",
+            "Definir preços de produtos com base no custo de produção.",
+            "Elaborar campanhas para reduzir o número de clientes."
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual é um dos principais desafios do benchmarking para startups de TI?",
+        options: [
+            "Acesso a dados confiáveis de concorrentes.",
+            "Redução de custos de desenvolvimento.",
+            "Contratação de novos funcionários.",
+            "Aumento das margens de lucro."
+        ],
+        correct: 0
+    },
+    {
+        question: "Como startups de TI podem aplicar o benchmarking na gestão de infraestrutura em nuvem?",
+        options: [
+            "Comparando suas práticas com líderes como AWS ou Google Cloud.",
+            "Aumentando os custos de armazenamento em nuvem.",
+            "Reduzindo o número de servidores usados.",
+            "Substituindo a infraestrutura por servidores locais."
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual é o benefício do benchmarking em atendimento ao cliente?",
+        options: [
+            "Melhorar a satisfação do cliente e aumentar a retenção.",
+            "Reduzir o número de atendentes de suporte.",
+            "Eliminar o serviço de atendimento ao cliente.",
+            "Aumentar os custos de suporte ao cliente."
+        ],
+        correct: 0
+    },
+    {
+        question: "Por que o benchmarking não é apenas uma cópia de práticas?",
+        options: [
+            "Porque se trata de aprender com outras empresas e adaptar as práticas para a própria realidade.",
+            "Porque copiar práticas pode ser ilegal.",
+            "Porque todas as práticas das concorrentes são ineficazes.",
+            "Porque envolve apenas análise de mercado."
+        ],
+        correct: 0
+    }
+];
+
+
+
+
+
+
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let isAnswered = false;
+
+        function loadQuestion() {
+            const questionContainer = document.getElementById('quiz');
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionContainer.innerHTML = `
+                <div class="question">${currentQuestion.question}</div>
+                <div class="options">
+                    ${currentQuestion.options.map((option, index) => `
+                        <label>
+                            <input type="radio" name="option" value="${index}"> ${option}
+                        </label>
+                    `).join('')}
+                </div>
+                <div id="feedback" class="feedback"></div>
+            `;
+            document.getElementById('action-btn').innerText = 'Confirmar Resposta';
+            isAnswered = false;
+        }
+
+        function handleAction() {
+            if (!isAnswered) {
+                checkAnswer();
+            } else {
+                nextQuestion();
+            }
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            const feedbackEl = document.getElementById('feedback');
+            if (selectedOption) {
+                const answer = parseInt(selectedOption.value);
+                if (answer === quizData[currentQuestionIndex].correct) {
+                    feedbackEl.innerText = 'Correto!';
+                    feedbackEl.style.color = 'green';
+                    score++;
+                } else {
+                    feedbackEl.innerText = `Errado! A resposta correta é: ${quizData[currentQuestionIndex].options[quizData[currentQuestionIndex].correct]}`;
+                    feedbackEl.style.color = 'red';
+                }
+                document.getElementById('action-btn').innerText = 'Próxima Questão';
+                isAnswered = true;
+            } else {
+                feedbackEl.innerText = 'Por favor, selecione uma resposta.';
+                feedbackEl.style.color = 'orange';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('action-btn').style.display = 'none';
+            document.getElementById('score').innerText = `Você acertou ${score} de ${quizData.length} perguntas!`;
+        }
+
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>

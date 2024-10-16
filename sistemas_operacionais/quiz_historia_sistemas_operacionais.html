@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTBJ - Sistemas Operacionais</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../script.js" defer></script>
+    <style>
+        body {
+            background-color: #f8f8f8;
+        }
+        header, footer {
+            background-color: #28a745; /* Cor igual aos botões de Empreendedorismo */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .quiz-container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .options {
+            margin-bottom: 20px;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .feedback {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .score {
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../img/logo_ufpi.png" alt="Logo UFPI" class="logo-ufpi">
+        </div>
+        <h1>Colégio Técnico de Bom Jesus</h1>
+        <h2>Universidade Federal do Piauí</h2>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Quiz: História dos Sistemas Operacionais</h2>
+        </div>
+    </section>
+
+    <section class="quiz-container">
+        <div id="quiz"></div>
+        <button id="action-btn" onclick="handleAction()">Confirmar Resposta</button>
+        <div id="score" class="score"></div>
+        <a href="disciplina_sistemas_operacionais.html" class="back-btn">Voltar à Página Anterior</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 - Colégio Técnico de Bom Jesus (CTBJ) - UFPI</p>
+    </footer>
+
+    <script>
+       
+
+       const quizData = [
+    {
+        question: "Qual era a principal tecnologia utilizada na Primeira Geração de computadores (1945-1955)?",
+        options: [
+            "Transistores",
+            "Válvulas e relés",
+            "Circuitos integrados",
+            "Microprocessadores"
+        ],
+        correct: 1
+    },
+    {
+        question: "Durante a Segunda Geração (1955-1965), qual foi o principal avanço tecnológico que impactou os sistemas operacionais?",
+        options: [
+            "Introdução dos microprocessadores",
+            "Uso de válvulas de vácuo",
+            "Introdução dos transistores e processamento em batch",
+            "Uso de dispositivos móveis"
+        ],
+        correct: 2
+    },
+    {
+        question: "Qual característica descreve o processamento em lote (batch processing) da Segunda Geração?",
+        options: [
+            "Execução de múltiplos programas ao mesmo tempo",
+            "Execução de programas acumulados sequencialmente sem interação do usuário",
+            "Uso de multiprogramação para maximizar o uso da CPU",
+            "Execução em tempo real com interação do usuário"
+        ],
+        correct: 1
+    },
+    {
+        question: "Qual foi a principal inovação da Terceira Geração de sistemas operacionais (1965-1980)?",
+        options: [
+            "Multiprogramação e sistemas de time-sharing",
+            "Computadores pessoais",
+            "Processamento em lote",
+            "Computação em nuvem"
+        ],
+        correct: 0
+    },
+    {
+        question: "O que significava o conceito de 'multiprogramação' introduzido na Terceira Geração?",
+        options: [
+            "Execução de um único programa por vez",
+            "Compartilhamento de memória entre múltiplos computadores",
+            "Carregamento e execução simultânea de vários programas na memória",
+            "Processamento em tempo real"
+        ],
+        correct: 2
+    },
+    {
+        question: "Qual sistema operacional foi introduzido na Terceira Geração e é considerado um dos primeiros a suportar múltiplos usuários e múltiplas aplicações?",
+        options: [
+            "MS-DOS",
+            "IBM OS/360",
+            "Unix",
+            "Windows"
+        ],
+        correct: 1
+    },
+    {
+        question: "Qual foi o grande marco da Quarta Geração (1980-) em termos de sistemas operacionais?",
+        options: [
+            "Invenção do sistema de multiprogramação",
+            "Popularização dos computadores pessoais e estações de trabalho",
+            "Introdução dos cartões perfurados",
+            "Invenção dos mainframes"
+        ],
+        correct: 1
+    },
+    {
+        question: "Durante a Quarta Geração, qual sistema operacional ganhou popularidade em estações de trabalho e ambientes acadêmicos?",
+        options: [
+            "MS-DOS",
+            "UNIX",
+            "Windows 95",
+            "Android"
+        ],
+        correct: 1
+    },
+    {
+        question: "A Quinta Geração (1990-) trouxe quais inovações para os sistemas operacionais?",
+        options: [
+            "Computação móvel e conectividade global",
+            "Introdução dos cartões perfurados",
+            "Uso exclusivo de processamento em batch",
+            "Desenvolvimento de mainframes"
+        ],
+        correct: 0
+    },
+    {
+        question: "Quais são exemplos de sistemas operacionais móveis que surgiram na Quinta Geração?",
+        options: [
+            "MS-DOS e UNIX",
+            "Android e iOS",
+            "Windows NT e Linux",
+            "Multics e CTSS"
+        ],
+        correct: 1
+    },
+    {
+        question: "O que foi a introdução da virtualização durante a evolução dos sistemas operacionais?",
+        options: [
+            "Um método para executar sistemas operacionais múltiplos em um único hardware físico",
+            "A criação de programas usando transistores",
+            "A implementação de processamento em lote",
+            "A invenção do Unix"
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual a importância da conectividade global para os sistemas operacionais da Quinta Geração?",
+        options: [
+            "Reduziu a necessidade de sistemas operacionais",
+            "Tornou os sistemas operacionais mais focados em redes e comunicação",
+            "Eliminou a necessidade de multiprogramação",
+            "Fez os sistemas operacionais voltarem para a arquitetura baseada em válvulas"
+        ],
+        correct: 1
+    }
+];
+
+
+
+
+
+
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let isAnswered = false;
+
+        function loadQuestion() {
+            const questionContainer = document.getElementById('quiz');
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionContainer.innerHTML = `
+                <div class="question">${currentQuestion.question}</div>
+                <div class="options">
+                    ${currentQuestion.options.map((option, index) => `
+                        <label>
+                            <input type="radio" name="option" value="${index}"> ${option}
+                        </label>
+                    `).join('')}
+                </div>
+                <div id="feedback" class="feedback"></div>
+            `;
+            document.getElementById('action-btn').innerText = 'Confirmar Resposta';
+            isAnswered = false;
+        }
+
+        function handleAction() {
+            if (!isAnswered) {
+                checkAnswer();
+            } else {
+                nextQuestion();
+            }
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            const feedbackEl = document.getElementById('feedback');
+            if (selectedOption) {
+                const answer = parseInt(selectedOption.value);
+                if (answer === quizData[currentQuestionIndex].correct) {
+                    feedbackEl.innerText = 'Correto!';
+                    feedbackEl.style.color = 'green';
+                    score++;
+                } else {
+                    feedbackEl.innerText = `Errado! A resposta correta é: ${quizData[currentQuestionIndex].options[quizData[currentQuestionIndex].correct]}`;
+                    feedbackEl.style.color = 'red';
+                }
+                document.getElementById('action-btn').innerText = 'Próxima Questão';
+                isAnswered = true;
+            } else {
+                feedbackEl.innerText = 'Por favor, selecione uma resposta.';
+                feedbackEl.style.color = 'orange';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('action-btn').style.display = 'none';
+            document.getElementById('score').innerText = `Você acertou ${score} de ${quizData.length} perguntas!`;
+        }
+
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>

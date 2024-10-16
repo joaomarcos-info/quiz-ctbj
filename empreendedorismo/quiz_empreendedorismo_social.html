@@ -1,0 +1,286 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTBJ - Quiz Empreendedorismo</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../script.js" defer></script>
+    <style>
+        body {
+            background-color: #f8f8f8;
+        }
+        header, footer {
+            background-color: #e7740f; /* Cor igual aos botões de Empreendedorismo */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .quiz-container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .options {
+            margin-bottom: 20px;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .feedback {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .score {
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #e7740f;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../img/logo_ufpi.png" alt="Logo UFPI" class="logo-ufpi">
+        </div>
+        <h1>Colégio Técnico de Bom Jesus</h1>
+        <h2>Universidade Federal do Piauí</h2>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Quiz: Empreendedorismo Social</h2>
+        </div>
+    </section>
+
+    <section class="quiz-container">
+        <div id="quiz"></div>
+        <button id="action-btn" onclick="handleAction()">Confirmar Resposta</button>
+        <div id="score" class="score"></div>
+        <a href="disciplina_empreendedorismo.html" class="back-btn">Voltar à Página Anterior</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 - Colégio Técnico de Bom Jesus (CTBJ) - UFPI</p>
+    </footer>
+
+    <script>
+       
+       const quizData = [
+        {
+            question: "O que é empreendedorismo social, segundo Dornelas (2016)?",
+            options: [
+                "Processo de criação de negócios focando no lucro.",
+                "Processo de criação de negócios com o objetivo de gerar impacto social positivo.",
+                "Criação de novas tecnologias para empresas privadas.",
+                "Ação de competir em mercados globais."
+            ],
+            correct: 1
+        },
+        {
+            question: "Qual é a principal característica do empreendedorismo social?",
+            options: [
+                "Maximizar o lucro da empresa.",
+                "Gerar impacto social ou ambiental positivo.",
+                "Concorrência agressiva no mercado.",
+                "Investimento em marketing digital."
+            ],
+            correct: 1
+        },
+        {
+            question: "O que é o Grameen Bank?",
+            options: [
+                "Um banco que oferece crédito apenas para grandes empresas.",
+                "Um projeto social para preservação de tartarugas.",
+                "Um banco que oferece microcrédito para pessoas de baixa renda.",
+                "Uma ONG que promove educação ambiental em escolas."
+            ],
+            correct: 2
+        },
+        {
+            question: "Qual é o foco principal do Projeto Tamar?",
+            options: [
+                "Preservação de tartarugas marinhas e turismo sustentável.",
+                "Criação de novas tecnologias para a agricultura.",
+                "Microcrédito para pequenos empreendedores.",
+                "Ensino de técnicas de reciclagem em áreas urbanas."
+            ],
+            correct: 0
+        },
+        {
+            question: "Como o empreendedorismo social pode transformar comunidades?",
+            options: [
+                "Através da criação de empregos e aumento do acesso a recursos.",
+                "Investindo em publicidade e propaganda.",
+                "Promovendo a competição no mercado global.",
+                "Reduzindo o número de trabalhadores nas empresas."
+            ],
+            correct: 0
+        },
+        {
+            question: "Qual é a definição de Desenvolvimento Sustentável, segundo Dornelas (2016)?",
+            options: [
+                "Desenvolvimento que atende às necessidades do presente sem comprometer as futuras gerações.",
+                "Criação de tecnologias avançadas para uso militar.",
+                "Investimento em grandes corporações.",
+                "Expansão das operações de negócios sem considerar impactos ambientais."
+            ],
+            correct: 0
+        },
+        {
+            question: "O que é a Teoria da Mudança (ToC)?",
+            options: [
+                "Uma metodologia que determina o impacto desejado e identifica as mudanças necessárias para atingi-lo.",
+                "Um método para definir o preço dos produtos.",
+                "Uma técnica de recrutamento de funcionários.",
+                "Um programa de financiamento de startups."
+            ],
+            correct: 0
+        },
+        {
+            question: "Qual é o papel do empreendedor social, segundo Trevisan (2000)?",
+            options: [
+                "Maximizar o lucro da empresa.",
+                "Usar a inovação para promover o bem-estar coletivo e desenvolvimento inclusivo.",
+                "Investir em marketing e publicidade.",
+                "Competir agressivamente no mercado."
+            ],
+            correct: 1
+        },
+        {
+            question: "O que é Social Return on Investment (SROI)?",
+            options: [
+                "Uma métrica para calcular o impacto financeiro gerado por um projeto social.",
+                "Uma técnica para reduzir custos de produção.",
+                "Uma análise de marketing digital.",
+                "Um método de recrutamento de voluntários."
+            ],
+            correct: 0
+        },
+        {
+            question: "Qual dos seguintes é um exemplo de desenvolvimento sustentável em ação?",
+            options: [
+                "Projeto Saúde e Alegria, promovendo saúde, educação e economia solidária na Amazônia.",
+                "Criação de uma nova campanha de marketing.",
+                "Financiamento de grandes corporações.",
+                "Competição por preços mais baixos no mercado."
+            ],
+            correct: 0
+        },
+        {
+            question: "Quais são os três pilares do desenvolvimento sustentável no empreendedorismo social?",
+            options: [
+                "Econômico, social e ambiental.",
+                "Tecnologia, marketing e lucro.",
+                "Publicidade, investimento e crescimento.",
+                "Concorrência, inovação e expansão."
+            ],
+            correct: 0
+        },
+        {
+            question: "Quais são os desafios enfrentados por empreendedores sociais?",
+            options: [
+                "Sustentabilidade financeira, escalabilidade e inovação constante.",
+                "Competição agressiva e monopólio.",
+                "Falta de interesse no impacto social.",
+                "Investimento em campanhas publicitárias."
+            ],
+            correct: 0
+        }
+    ];
+
+       
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let isAnswered = false;
+
+        function loadQuestion() {
+            const questionContainer = document.getElementById('quiz');
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionContainer.innerHTML = `
+                <div class="question">${currentQuestion.question}</div>
+                <div class="options">
+                    ${currentQuestion.options.map((option, index) => `
+                        <label>
+                            <input type="radio" name="option" value="${index}"> ${option}
+                        </label>
+                    `).join('')}
+                </div>
+                <div id="feedback" class="feedback"></div>
+            `;
+            document.getElementById('action-btn').innerText = 'Confirmar Resposta';
+            isAnswered = false;
+        }
+
+        function handleAction() {
+            if (!isAnswered) {
+                checkAnswer();
+            } else {
+                nextQuestion();
+            }
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            const feedbackEl = document.getElementById('feedback');
+            if (selectedOption) {
+                const answer = parseInt(selectedOption.value);
+                if (answer === quizData[currentQuestionIndex].correct) {
+                    feedbackEl.innerText = 'Correto!';
+                    feedbackEl.style.color = 'green';
+                    score++;
+                } else {
+                    feedbackEl.innerText = `Errado! A resposta correta é: ${quizData[currentQuestionIndex].options[quizData[currentQuestionIndex].correct]}`;
+                    feedbackEl.style.color = 'red';
+                }
+                document.getElementById('action-btn').innerText = 'Próxima Questão';
+                isAnswered = true;
+            } else {
+                feedbackEl.innerText = 'Por favor, selecione uma resposta.';
+                feedbackEl.style.color = 'orange';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('action-btn').style.display = 'none';
+            document.getElementById('score').innerText = `Você acertou ${score} de ${quizData.length} perguntas!`;
+        }
+
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>
