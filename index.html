@@ -5,6 +5,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CTBJ - Sistema de Quizzes</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #004080;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        .logo-container {
+            text-align: center;
+        }
+
+        .logo-ufpi {
+            max-width: 100px;
+        }
+
+        .hero {
+            background-color: #e0e0e0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .disciplinas {
+            padding: 20px;
+        }
+
+        .disciplinas-lista {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .disciplina-card {
+            text-decoration: none;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            width: 200px;
+            transition: background-color 0.3s;
+        }
+
+        .sistemas-operacionais {
+            background-color: #28a745;
+        }
+
+        .desenvolvimento-web {
+            background-color: #007bff;
+        }
+
+        .projeto-integrador {
+            background-color: #6f42c1;
+        }
+
+        .empreendedorismo {
+            background-color: #fd7e14;
+        }
+
+        .engenharia-software {
+            background-color: #d9534f;
+        }
+
+        .disciplina-card:hover {
+            opacity: 0.8;
+        }
+
+        footer {
+            background-color: #004080;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .disciplinas-lista {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .disciplina-card {
+                width: 80%;
+                max-width: 300px;
+            }
+
+            .hero {
+                padding: 10px;
+            }
+
+            header h1, header h2 {
+                font-size: 1.5em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.2em;
+            }
+
+            header h2 {
+                font-size: 1em;
+            }
+
+            .logo-ufpi {
+                max-width: 70px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -32,9 +150,7 @@
             <a href="../quiz-ctbj/engenharia_de_software/disciplina_engenharia_software.html" class="disciplina-card engenharia-software">Engenharia de Software</a>
         </div>
     </section>
-    
 
-    
     <footer>
         <p>&copy; 2024 - Colégio Técnico de Bom Jesus (CTBJ) - UFPI</p>
         <p>Autor: João Marcos Rosal</p>
