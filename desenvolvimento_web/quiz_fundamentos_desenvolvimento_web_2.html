@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTBJ - Quiz Desenvolvimento Web</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../script.js" defer></script>
+    <style>
+        body {
+            background-color: #f8f8f8;
+        }
+        header, footer {
+            background-color: #007bff; /* Cor igual aos botões de Empreendedorismo */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .quiz-container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .options {
+            margin-bottom: 20px;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .feedback {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .score {
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../img/logo_ufpi.png" alt="Logo UFPI" class="logo-ufpi">
+        </div>
+        <h1>Colégio Técnico de Bom Jesus</h1>
+        <h2>Universidade Federal do Piauí</h2>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Quiz: Fundamentos do Desenvolvimento Web</h2>
+        </div>
+    </section>
+
+    <section class="quiz-container">
+        <div id="quiz"></div>
+        <button id="action-btn" onclick="handleAction()">Confirmar Resposta</button>
+        <div id="score" class="score"></div>
+        <a href="disciplina_desenvolvimento_web.html" class="back-btn">Voltar à Página Anterior</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 - Colégio Técnico de Bom Jesus (CTBJ) - UFPI</p>
+    </footer>
+
+    <script>
+       
+
+
+
+       const quizData = [
+    {
+        question: "Qual das seguintes tags foi introduzida no HTML5 para melhorar a acessibilidade e organização do conteúdo?",
+        options: [
+            "< blink >",
+            "< marquee >",
+            "< header >",
+            "< applet >"
+        ],
+        correct: 2
+    },
+    {
+        question: "Qual a função do método `getElementById()` em JavaScript?",
+        options: [
+            "Criar um novo elemento HTML.",
+            "Selecionar um elemento HTML com base no seu ID.",
+            "Modificar o estilo CSS de todos os elementos.",
+            "Apagar um elemento HTML da página."
+        ],
+        correct: 1
+    },
+    {
+        question: "Qual das seguintes opções descreve a função de um evento `onclick` em JavaScript?",
+        options: [
+            "Executar um loop para todos os elementos da página.",
+            "Selecionar um elemento pelo ID.",
+            "Adicionar estilos a elementos HTML.",
+            "Detectar cliques em um elemento HTML e executar uma função associada."
+        ],
+        correct: 3
+    },
+    {
+        question: "Qual é a tag HTML5 usada para representar conteúdo independente e reutilizável?",
+        options: [
+            "< div >",
+            "< span >",
+            "< article >",
+            "< section >"
+        ],
+        correct: 2
+    },
+    {
+        question: "Qual propriedade do CSS controla a cor do texto de um elemento?",
+        options: [
+            "text-style",
+            "background-color",
+            "font-family",
+            "color"
+        ],
+        correct: 3
+    },
+    {
+        question: "Qual é a principal função da tag `< canvas >` no HTML5?",
+        options: [
+            "Criar listas não ordenadas.",
+            "Adicionar estilos CSS a elementos.",
+            "Desenhar gráficos diretamente no navegador utilizando JavaScript.",
+            "Definir a estrutura básica da página."
+        ],
+        correct: 2
+    },
+    {
+        question: "Qual é o papel da propriedade `font-size` no CSS?",
+        options: [
+            "Modificar a cor de fundo.",
+            "Inserir uma imagem no documento.",
+            "Definir o tamanho da fonte do texto.",
+            "Adicionar sombra ao texto."
+        ],
+        correct: 2
+    },
+    {
+        question: "O que é uma API do HTML5?",
+        options: [
+            "Uma técnica para desenvolver backend.",
+            "Uma ferramenta para formatar texto em negrito.",
+            "Um sistema de animação 3D.",
+            "Uma funcionalidade que permite interações mais dinâmicas e ricas, como armazenamento local e funcionalidades offline."
+        ],
+        correct: 3
+    },
+    {
+        question: "Como é possível manipular o estilo CSS de um elemento utilizando JavaScript?",
+        options: [
+            "Utilizando a propriedade `style` do elemento.",
+            "Com a função `createElement()`.",
+            "Com o método `appendChild()`.",
+            "Com a propriedade `getAttribute()`."
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual das seguintes opções NÃO é uma tag semântica do HTML5?",
+        options: [
+            "< header >",
+            "< footer >",
+            "< div >",
+            "< section >"
+        ],
+        correct: 2
+    },
+    {
+        question: "Qual método do JavaScript permite adicionar um novo evento a um elemento?",
+        options: [
+            "getElementById()",
+            "querySelector()",
+            "addEventListener()",
+            "appendChild()"
+        ],
+        correct: 2
+    },
+    {
+        question: "Qual das seguintes alternativas é um exemplo de seletor CSS?",
+        options: [
+            "< elemento >",
+            "onclick",
+            "#idDoElemento",
+            "innerHTML"
+        ],
+        correct: 2
+    },
+    {
+        question: "Qual é a tag utilizada para definir um conteúdo multimídia de vídeo no HTML5?",
+        options: [
+            "< audio >",
+            "< source >",
+            "< video >",
+            "< img >"
+        ],
+        correct: 2
+    },
+    {
+        question: "Qual das seguintes propriedades CSS ajusta o espaçamento interno de um elemento?",
+        options: [
+            "margin",
+            "outline",
+            "padding",
+            "border"
+        ],
+        correct: 2
+    },
+    {
+        question: "O que faz o método `querySelector()` em JavaScript?",
+        options: [
+            "Seleciona o primeiro elemento que corresponde ao seletor CSS fornecido.",
+            "Cria um novo documento HTML.",
+            "Aplica um estilo específico a todos os elementos.",
+            "Gera um alerta para o usuário."
+        ],
+        correct: 0
+    },
+    {
+        question: "Como o JavaScript pode alterar o conteúdo de um elemento HTML?",
+        options: [
+            "Utilizando a propriedade `backgroundColor`.",
+            "Através da função `alert()`.",
+            "Utilizando a propriedade `innerHTML`.",
+            "Utilizando a função `console.log()`."
+        ],
+        correct: 2
+    },
+    {
+        question: "O que são `pseudo-classes` no CSS?",
+        options: [
+            "Classes que permitem definir estilos com base no estado de um elemento, como `hover`.",
+            "Classes que criam animações CSS.",
+            "Classes que definem a estrutura HTML.",
+            "Classes que permitem executar funções JavaScript."
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual método JavaScript é usado para alterar a cor do texto de um elemento?",
+        options: [
+            "addEventListener()",
+            "document.getElementById('elemento').style.color",
+            "document.querySelector('elemento').innerHTML",
+            "alert()"
+        ],
+        correct: 1
+    },
+    {
+        question: "Qual dos seguintes NÃO é um tipo de formulário introduzido pelo HTML5?",
+        options: [
+            "date",
+            "range",
+            "button",
+            "spinner"
+        ],
+        correct: 3
+    },
+    {
+        question: "Para que serve a propriedade `margin` no CSS?",
+        options: [
+            "Criar uma borda ao redor do elemento.",
+            "Modificar a cor do texto.",
+            "Definir o espaçamento externo de um elemento.",
+            "Definir o espaçamento interno de um elemento."
+        ],
+        correct: 2
+    }
+];
+
+
+
+       
+
+
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let isAnswered = false;
+
+        function loadQuestion() {
+            const questionContainer = document.getElementById('quiz');
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionContainer.innerHTML = `
+                <div class="question">${currentQuestion.question}</div>
+                <div class="options">
+                    ${currentQuestion.options.map((option, index) => `
+                        <label>
+                            <input type="radio" name="option" value="${index}"> ${option}
+                        </label>
+                    `).join('')}
+                </div>
+                <div id="feedback" class="feedback"></div>
+            `;
+            document.getElementById('action-btn').innerText = 'Confirmar Resposta';
+            isAnswered = false;
+        }
+
+        function handleAction() {
+            if (!isAnswered) {
+                checkAnswer();
+            } else {
+                nextQuestion();
+            }
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            const feedbackEl = document.getElementById('feedback');
+            if (selectedOption) {
+                const answer = parseInt(selectedOption.value);
+                if (answer === quizData[currentQuestionIndex].correct) {
+                    feedbackEl.innerText = 'Correto!';
+                    feedbackEl.style.color = 'green';
+                    score++;
+                } else {
+                    feedbackEl.innerText = `Errado! A resposta correta é: ${quizData[currentQuestionIndex].options[quizData[currentQuestionIndex].correct]}`;
+                    feedbackEl.style.color = 'red';
+                }
+                document.getElementById('action-btn').innerText = 'Próxima Questão';
+                isAnswered = true;
+            } else {
+                feedbackEl.innerText = 'Por favor, selecione uma resposta.';
+                feedbackEl.style.color = 'orange';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('action-btn').style.display = 'none';
+            document.getElementById('score').innerText = `Você acertou ${score} de ${quizData.length} perguntas!`;
+        }
+
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>
