@@ -90,127 +90,199 @@
     <script>
        
        const quizData = [
-            {
-                question: "O que é gestão de recursos?",
-                options: [
-                    "Planejamento, organização e controle dos recursos de uma empresa.",
-                    "Redução dos custos de produção.",
-                    "Criação de produtos para novos mercados.",
-                    "Análise de oportunidades de negócio."
-                ],
-                correct: 0
-            },
-            {
-                question: "Qual é a importância do planejamento estratégico?",
-                options: [
-                    "Definir onde a empresa quer chegar e como chegará lá.",
-                    "Contratar novos funcionários.",
-                    "Reduzir custos de produção.",
-                    "Aumentar os preços dos produtos."
-                ],
-                correct: 0
-            },
-            {
-                question: "O que é ciclo de vida das empresas?",
-                options: [
-                    "Fases pelas quais uma empresa passa desde a sua criação até o declínio ou renovação.",
-                    "Processo de contratação de empregados.",
-                    "A criação de produtos e serviços.",
-                    "Definição de estratégias de marketing."
-                ],
-                correct: 0
-            },
-            {
-                question: "Quais são as fases do ciclo de vida de uma empresa?",
-                options: [
-                    "Nascimento, crescimento, maturidade e declínio ou renovação.",
-                    "Início, meio e fim.",
-                    "Introdução, crescimento e encerramento.",
-                    "Criação, expansão e falência."
-                ],
-                correct: 0
-            },
-            {
-                question: "O que é análise SWOT?",
-                options: [
-                    "Uma ferramenta para analisar Forças, Fraquezas, Oportunidades e Ameaças.",
-                    "Um método de contratação de funcionários.",
-                    "Uma técnica de criação de logotipos.",
-                    "Uma forma de monitorar a saída de produtos."
-                ],
-                correct: 0
-            },
-            {
-                question: "Qual é a importância do planejamento financeiro?",
-                options: [
-                    "Alocar recursos financeiros de maneira eficiente para garantir o crescimento da empresa.",
-                    "Aumentar os salários dos funcionários.",
-                    "Reduzir a carga tributária.",
-                    "Eliminar a concorrência."
-                ],
-                correct: 0
-            },
-            {
-                question: "O que é definição de metas SMART?",
-                options: [
-                    "Metas que são Específicas, Mensuráveis, Atingíveis, Relevantes e Temporais.",
-                    "Metas que são Simples e Rápidas.",
-                    "Metas para grandes empresas.",
-                    "Metas criadas para aumento de vendas."
-                ],
-                correct: 0
-            },
-            {
-                question: "Qual é um exemplo de meta de longo prazo?",
-                options: [
-                    "Ser a empresa líder de mercado na América Latina em 10 anos.",
-                    "Aumentar em 20% o número de clientes até o final do ano.",
-                    "Reduzir custos em 10% no próximo mês.",
-                    "Contratar cinco novos funcionários no próximo trimestre."
-                ],
-                correct: 0
-            },
-            {
-                question: "Qual é o objetivo do benchmarking?",
-                options: [
-                    "Comparar as práticas da empresa com as melhores práticas do mercado para melhorar o desempenho.",
-                    "Reduzir o número de produtos oferecidos.",
-                    "Aumentar os preços dos produtos.",
-                    "Eliminar a concorrência."
-                ],
-                correct: 0
-            },
-            {
-                question: "O que caracteriza a fase de maturidade de uma empresa?",
-                options: [
-                    "Estabilidade nas operações e busca por inovação para evitar o declínio.",
-                    "Encerramento das atividades.",
-                    "Redução de produção.",
-                    "Expansão para novos mercados."
-                ],
-                correct: 0
-            },
-            {
-                question: "Por que é importante definir metas claras para uma empresa?",
-                options: [
-                    "Para alinhar os esforços de todos os colaboradores e medir o progresso.",
-                    "Para reduzir o número de empregados.",
-                    "Para definir os preços dos produtos.",
-                    "Para contratar novos funcionários."
-                ],
-                correct: 0
-            },
-            {
-                question: "Qual é um desafio comum na fase de declínio de uma empresa?",
-                options: [
-                    "Encontrar maneiras de reinventar o negócio ou decidir por encerrar as atividades.",
-                    "Aumentar a produção.",
-                    "Reduzir os preços dos produtos.",
-                    "Contratar novos funcionários."
-                ],
-                correct: 0
-            }
-        ];
+    {
+        question: "O que é gestão de recursos?",
+        options: [
+            "Planejamento, organização e controle dos recursos de uma empresa.",
+            "Redução dos custos de produção.",
+            "Criação de produtos para novos mercados.",
+            "Análise de oportunidades de negócio."
+        ],
+        correct: 0
+    },
+    {
+        question: "O planejamento financeiro deve ser feito apenas uma vez, no início do negócio.",
+        options: [
+            "Verdadeiro",
+            "Falso"
+        ],
+        correct: 1
+    },
+    {
+        question: "Qual é a importância do planejamento estratégico?",
+        options: [
+            "Definir onde a empresa quer chegar e como chegará lá.",
+            "Contratar novos funcionários.",
+            "Reduzir custos de produção.",
+            "Aumentar os preços dos produtos."
+        ],
+        correct: 0
+    },
+    {
+        question: "O benchmarking pode ser usado para entender as melhores práticas do mercado e aplicá-las na empresa.",
+        options: [
+            "Verdadeiro",
+            "Falso"
+        ],
+        correct: 0
+    },
+    {
+        question: "O que é ciclo de vida das empresas?",
+        options: [
+            "Fases pelas quais uma empresa passa desde a sua criação até o declínio ou renovação.",
+            "Processo de contratação de empregados.",
+            "A criação de produtos e serviços.",
+            "Definição de estratégias de marketing."
+        ],
+        correct: 0
+    },
+    {
+        question: "A análise SWOT é uma ferramenta utilizada apenas por grandes empresas.",
+        options: [
+            "Verdadeiro",
+            "Falso"
+        ],
+        correct: 1
+    },
+    {
+        question: "Quais são as fases do ciclo de vida de uma empresa?",
+        options: [
+            "Nascimento, crescimento, maturidade e declínio ou renovação.",
+            "Início, meio e fim.",
+            "Introdução, crescimento e encerramento.",
+            "Criação, expansão e falência."
+        ],
+        correct: 0
+    },
+    {
+        question: "A fase de maturidade no ciclo de vida de uma empresa não requer mais inovação.",
+        options: [
+            "Verdadeiro",
+            "Falso"
+        ],
+        correct: 1
+    },
+    {
+        question: "O que é análise SWOT?",
+        options: [
+            "Uma ferramenta para analisar Forças, Fraquezas, Oportunidades e Ameaças.",
+            "Um método de contratação de funcionários.",
+            "Uma técnica de criação de logotipos.",
+            "Uma forma de monitorar a saída de produtos."
+        ],
+        correct: 0
+    },
+    {
+        question: "Metas SMART devem ser ambiciosas e impossíveis de alcançar.",
+        options: [
+            "Verdadeiro",
+            "Falso"
+        ],
+        correct: 1
+    },
+    {
+        question: "Qual é a importância do planejamento financeiro?",
+        options: [
+            "Alocar recursos financeiros de maneira eficiente para garantir o crescimento da empresa.",
+            "Aumentar os salários dos funcionários.",
+            "Reduzir a carga tributária.",
+            "Eliminar a concorrência."
+        ],
+        correct: 0
+    },
+    {
+        question: "O planejamento estratégico envolve definir onde a empresa quer chegar e como chegará lá.",
+        options: [
+            "Verdadeiro",
+            "Falso"
+        ],
+        correct: 0
+    },
+    {
+        question: "O que é definição de metas SMART?",
+        options: [
+            "Metas que são Específicas, Mensuráveis, Atingíveis, Relevantes e Temporais.",
+            "Metas que são Simples e Rápidas.",
+            "Metas para grandes empresas.",
+            "Metas criadas para aumento de vendas."
+        ],
+        correct: 0
+    },
+    {
+        question: "O ciclo de vida de uma empresa inclui fases como nascimento, crescimento, maturidade e declínio.",
+        options: [
+            "Verdadeiro",
+            "Falso"
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual é um exemplo de meta de longo prazo?",
+        options: [
+            "Ser a empresa líder de mercado na América Latina em 10 anos.",
+            "Aumentar em 20% o número de clientes até o final do ano.",
+            "Reduzir custos em 10% no próximo mês.",
+            "Contratar cinco novos funcionários no próximo trimestre."
+        ],
+        correct: 0
+    },
+    {
+        question: "A principal característica de metas SMART é que elas são vagas e difíceis de medir.",
+        options: [
+            "Verdadeiro",
+            "Falso"
+        ],
+        correct: 1
+    },
+    {
+        question: "Qual é o objetivo do benchmarking?",
+        options: [
+            "Comparar as práticas da empresa com as melhores práticas do mercado para melhorar o desempenho.",
+            "Reduzir o número de produtos oferecidos.",
+            "Aumentar os preços dos produtos.",
+            "Eliminar a concorrência."
+        ],
+        correct: 0
+    },
+    {
+        question: "O planejamento financeiro eficiente ajuda a alocar recursos de forma que promova o crescimento sustentável da empresa.",
+        options: [
+            "Verdadeiro",
+            "Falso"
+        ],
+        correct: 0
+    },
+    {
+        question: "O que caracteriza a fase de maturidade de uma empresa?",
+        options: [
+            "Estabilidade nas operações e busca por inovação para evitar o declínio.",
+            "Encerramento das atividades.",
+            "Redução de produção.",
+            "Expansão para novos mercados."
+        ],
+        correct: 0
+    },
+    {
+        question: "Por que é importante definir metas claras para uma empresa?",
+        options: [
+            "Para alinhar os esforços de todos os colaboradores e medir o progresso.",
+            "Para reduzir o número de empregados.",
+            "Para definir os preços dos produtos.",
+            "Para contratar novos funcionários."
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual é um desafio comum na fase de declínio de uma empresa?",
+        options: [
+            "Encontrar maneiras de reinventar o negócio ou decidir por encerrar as atividades.",
+            "Aumentar a produção.",
+            "Reduzir os preços dos produtos.",
+            "Contratar novos funcionários."
+        ],
+        correct: 0
+    }
+];
 
         let currentQuestionIndex = 0;
         let score = 0;

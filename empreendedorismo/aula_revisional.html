@@ -1,0 +1,289 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTBJ - Quiz Empreendedorismo</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../script.js" defer></script>
+    <style>
+        body {
+            background-color: #f8f8f8;
+        }
+        header, footer {
+            background-color: #e7740f; /* Cor igual aos botões de Empreendedorismo */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .quiz-container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .options {
+            margin-bottom: 20px;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .feedback {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .score {
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #e7740f;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../img/logo_ufpi.png" alt="Logo UFPI" class="logo-ufpi">
+        </div>
+        <h1>Colégio Técnico de Bom Jesus</h1>
+        <h2>Universidade Federal do Piauí</h2>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Quiz: Aula Revisional Empreendedorismo</h2>
+        </div>
+    </section>
+
+    <section class="quiz-container">
+        <div id="quiz"></div>
+        <button id="action-btn" onclick="handleAction()">Confirmar Resposta</button>
+        <div id="score" class="score"></div>
+        <a href="disciplina_empreendedorismo.html" class="back-btn">Voltar à Página Anterior</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 - Colégio Técnico de Bom Jesus (CTBJ) - UFPI</p>
+    </footer>
+
+    <script>
+       
+       const quizData = [
+            {
+                question: "O que é empreendedorismo?",
+                options: [
+                    "Ação de criar e desenvolver novos negócios.",
+                    "Processo de testar um software antes do lançamento.",
+                    "Ação de reduzir custos em uma empresa.",
+                    "Planejamento financeiro de uma organização."
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual a principal característica de um empreendedor?",
+                options: [
+                    "Aversão ao risco.",
+                    "Criatividade e inovação.",
+                    "Passividade diante de problemas.",
+                    "Desinteresse por mudanças."
+                ],
+                correct: 1
+            },
+            {
+                question: "O que é gestão de recursos?",
+                options: [
+                    "Planejamento, organização e controle dos recursos de uma empresa.",
+                    "Redução dos custos de produção.",
+                    "Criação de produtos para novos mercados.",
+                    "Análise de oportunidades de negócio."
+                ],
+                correct: 0
+            },
+            {
+                question: "Quais são as fases do ciclo de vida de uma empresa?",
+                options: [
+                    "Nascimento, crescimento, maturidade e declínio ou renovação.",
+                    "Início, meio e fim.",
+                    "Introdução, crescimento e encerramento.",
+                    "Criação, expansão e falência."
+                ],
+                correct: 0
+            },
+            {
+                question: "O que é empreendedorismo social?",
+                options: [
+                    "Empreendimento com foco em lucro acima de tudo.",
+                    "Criação de soluções para problemas sociais.",
+                    "Desenvolvimento de tecnologias para empresas privadas.",
+                    "Comércio de produtos eletrônicos."
+                ],
+                correct: 1
+            },
+            {
+            question: "Como o empreendedorismo social pode transformar comunidades?",
+            options: [
+                "Investindo em publicidade e propaganda.",
+                "Promovendo a competição no mercado global.",
+                "Através da criação de empregos e aumento do acesso a recursos.",
+                "Reduzindo o número de trabalhadores nas empresas."
+            ],
+            correct: 2
+            },
+            {
+            question: "O que é uma oportunidade de negócio na área de TI?",
+            options: [
+            "Elaboração de campanhas de marketing digital.",
+            "Planejamento de logística de transporte.",
+            "Redução de custos operacionais em indústrias tradicionais.",
+            "Criação de novas soluções em tecnologia para atender necessidades específicas."
+             ],
+             correct: 3
+            },
+            {
+            question: "Qual das seguintes opções é um exemplo de uma oportunidade de negócio em cibersegurança?",
+            options: [
+                "Desenvolver uma plataforma de jogos.",
+                "Oferecer soluções de proteção contra malware e ataques cibernéticos.",
+                "Criar um novo software de edição de vídeo.",
+                "Gerenciar uma loja de roupas online."
+            ],
+            correct: 1
+            },
+            {
+            question: "O que é benchmarking?",
+            options: [
+                "Um processo contínuo de medir produtos, serviços e práticas de uma empresa em relação às melhores práticas de outras.",
+                "Uma técnica para reduzir custos de produção.",
+                "Um método para contratar novos funcionários.",
+                "Um sistema de avaliação de desempenho individual."
+            ],
+            correct: 0
+            },
+            {
+            question: "Qual é o objetivo principal do benchmarking?",
+            options: [
+                "Copiar as melhores práticas de concorrentes.",
+                "Reduzir a quantidade de produtos oferecidos.",
+                "Eliminar a concorrência direta.",
+                "Melhorar a qualidade, eficiência e competitividade da organização."
+                
+            ],
+            correct: 3
+            },
+            {
+            question: "Por que o benchmarking é importante para startups de TI?",
+            options: [
+                "Para copiar todas as práticas de outras empresas.",
+                "Para identificar práticas eficientes e melhorar os processos internos.",
+                "Para reduzir o número de funcionários.",
+                "Para aumentar o custo de aquisição de clientes."
+            ],
+            correct: 1
+            },
+            {
+            question: "Por que o benchmarking não é apenas uma cópia de práticas?",
+            options: [
+                "Porque copiar práticas pode ser ilegal.",
+                "Porque todas as práticas das concorrentes são ineficazes.",
+                "Porque se trata de aprender com outras empresas e adaptar as práticas para a própria realidade.",
+                "Porque envolve apenas análise de mercado."
+            ],
+            correct: 2
+            }
+
+
+            ];
+
+
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let isAnswered = false;
+
+        function loadQuestion() {
+            const questionContainer = document.getElementById('quiz');
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionContainer.innerHTML = `
+                <div class="question">${currentQuestion.question}</div>
+                <div class="options">
+                    ${currentQuestion.options.map((option, index) => `
+                        <label>
+                            <input type="radio" name="option" value="${index}"> ${option}
+                        </label>
+                    `).join('')}
+                </div>
+                <div id="feedback" class="feedback"></div>
+            `;
+            document.getElementById('action-btn').innerText = 'Confirmar Resposta';
+            isAnswered = false;
+        }
+
+        function handleAction() {
+            if (!isAnswered) {
+                checkAnswer();
+            } else {
+                nextQuestion();
+            }
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            const feedbackEl = document.getElementById('feedback');
+            if (selectedOption) {
+                const answer = parseInt(selectedOption.value);
+                if (answer === quizData[currentQuestionIndex].correct) {
+                    feedbackEl.innerText = 'Correto!';
+                    feedbackEl.style.color = 'green';
+                    score++;
+                } else {
+                    feedbackEl.innerText = `Errado! A resposta correta é: ${quizData[currentQuestionIndex].options[quizData[currentQuestionIndex].correct]}`;
+                    feedbackEl.style.color = 'red';
+                }
+                document.getElementById('action-btn').innerText = 'Próxima Questão';
+                isAnswered = true;
+            } else {
+                feedbackEl.innerText = 'Por favor, selecione uma resposta.';
+                feedbackEl.style.color = 'orange';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('action-btn').style.display = 'none';
+            document.getElementById('score').innerText = `Você acertou ${score} de ${quizData.length} perguntas!`;
+        }
+
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>
