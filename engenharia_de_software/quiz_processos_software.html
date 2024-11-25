@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTBJ - Quiz Análise de Requisitos de Software</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../script.js" defer></script>
+    <style>
+        body {
+            background-color: #f8f8f8;
+        }
+        header, footer {
+            background-color: #d9534f; /* Cor igual aos botões */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .quiz-container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .options {
+            margin-bottom: 20px;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .feedback {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .score {
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #d9534f;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../img/logo_ufpi.png" alt="Logo UFPI" class="logo-ufpi">
+        </div>
+        <h1>Colégio Técnico de Bom Jesus</h1>
+        <h2>Universidade Federal do Piauí</h2>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Quiz: Processos de Software</h2>
+        </div>
+    </section>
+
+    <section class="quiz-container">
+        <div id="quiz"></div>
+        <button id="action-btn" onclick="handleAction()">Confirmar Resposta</button>
+        <div id="score" class="score"></div>
+        <a href="../engenharia_de_software/disciplina_engenharia_software.html" class="back-btn">Voltar à Página Anterior</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 - Colégio Técnico de Bom Jesus (CTBJ) - UFPI</p>
+    </footer>
+
+    <script>
+
+const quizData = [
+    {
+        question: "O que é o modelo de desenvolvimento em Cascata?",
+        options: [
+            "Um modelo iterativo que permite ajustes frequentes.",
+            "Um modelo ágil que foca em ciclos curtos de desenvolvimento.",
+            "Um modelo sequencial onde cada fase depende da conclusão da fase anterior.",
+            "Um modelo que promove o desenvolvimento em paralelo de diferentes partes do sistema."
+        ],
+        correct: 2
+    },
+    {
+        question: "Quais são as principais desvantagens do modelo Cascata?",
+        options: [
+            "Altos custos de manutenção.",
+            "Falta de flexibilidade para alterações durante o desenvolvimento.",
+            "Foco excessivo em testes automatizados.",
+            "Necessidade de grandes equipes de desenvolvimento."
+        ],
+        correct: 1
+    },
+    {
+        question: "Como o modelo Incremental difere do modelo Cascata?",
+        options: [
+            "O modelo Incremental é mais focado em design do que em codificação.",
+            "O modelo Incremental é utilizado apenas para projetos pequenos.",
+            "O modelo Incremental exige que todos os requisitos sejam definidos no início.",
+            "O modelo Incremental permite a entrega de partes funcionais do sistema ao longo do desenvolvimento."
+        ],
+        correct: 3
+    },
+    {
+        question: "Qual é a principal vantagem do modelo de desenvolvimento Espiral?",
+        options: [
+            "Reduz o tempo de desenvolvimento de grandes sistemas.",
+            "Combina elementos de prototipagem e análise de risco para um desenvolvimento mais seguro.",
+            "Elimina a necessidade de planejamento.",
+            "Foca exclusivamente no design da interface do usuário."
+        ],
+        correct: 1
+    },
+    {
+        question: "Quando seria mais adequado usar o modelo Incremental em vez do modelo Espiral?",
+        options: [
+            "Quando o desenvolvimento é ágil e flexível.",
+            "Quando os requisitos são bem conhecidos e é desejável ter entregas frequentes e funcionais.",
+            "Quando há necessidade de constante avaliação de riscos.",
+            "Quando não é necessário prototipar as soluções." 
+        ],
+        correct: 1
+    },
+    {
+        question: "Qual é uma característica-chave do modelo Ágil de desenvolvimento?",
+        options: [
+            "Planejamento a longo prazo sem adaptação durante o desenvolvimento.",
+            "Prototipagem de todas as interfaces antes da codificação.",
+            "Interações curtas e entregas frequentes de software funcional.",
+            "Análise extensiva de riscos antes de qualquer desenvolvimento." 
+        ],
+        correct: 2
+    },
+    {
+        question: "Qual das seguintes é uma vantagem do desenvolvimento Ágil em relação ao Cascata?",
+        options: [
+            "Maior capacidade de resposta às mudanças dos requisitos durante o desenvolvimento.",
+            "Menos necessidade de interação com o cliente.",
+            "Maior foco na documentação e no planejamento.",
+            "Entrega do produto apenas ao final do ciclo." 
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual modelo é mais adequado para projetos onde os requisitos não são claros desde o início?",
+        options: [
+            "Modelo Cascata.",
+            "Modelo Incremental.",
+            "Modelo Iterativo.",
+            "Modelo Espiral." 
+        ],
+        correct: 3
+    },
+    {
+        question: "Quais são as principais diferenças entre metodologias ágeis e metodologias clássicas?",
+        options: [
+            "Documentação detalhada e planejamento extenso versus pouca interação com o cliente.",
+            "Entrega sem testes versus entregas planejadas.",
+            "Flexibilidade, foco no cliente e entregas incrementais versus rigidez e entrega apenas ao final do ciclo.",
+            "Redução de custos com equipe versus aumento de custos com infraestrutura."
+        ],
+        correct: 2
+    },
+    {
+        question: "As metodologias ágeis têm como um dos principais pilares a colaboração frequente com o cliente durante o desenvolvimento.",
+        options: [
+            "Verdadeiro",
+            "Falso"
+        ],
+        correct: 0
+    },
+    {
+        question: "O modelo Cascata é adequado para projetos com requisitos muito bem definidos e que não sofrerão mudanças durante o desenvolvimento.",
+        options: [
+            "Falso",
+            "Verdadeiro"
+        ],
+        correct: 1
+    },
+    {
+        question: "No modelo Espiral, cada ciclo envolve planejamento, análise de risco, desenvolvimento e avaliação do cliente.",
+        options: [
+            "Verdadeiro",
+            "Falso"
+        ],
+        correct: 0
+    }
+];
+ 
+
+
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let isAnswered = false;
+
+        function loadQuestion() {
+            const questionContainer = document.getElementById('quiz');
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionContainer.innerHTML = `
+                <div class="question">${currentQuestion.question}</div>
+                <div class="options">
+                    ${currentQuestion.options.map((option, index) => `
+                        <label>
+                            <input type="radio" name="option" value="${index}"> ${option}
+                        </label>
+                    `).join('')}
+                </div>
+                <div id="feedback" class="feedback"></div>
+            `;
+            document.getElementById('action-btn').innerText = 'Confirmar Resposta';
+            isAnswered = false;
+        }
+
+        function handleAction() {
+            if (!isAnswered) {
+                checkAnswer();
+            } else {
+                nextQuestion();
+            }
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            const feedbackEl = document.getElementById('feedback');
+            if (selectedOption) {
+                const answer = parseInt(selectedOption.value);
+                if (answer === quizData[currentQuestionIndex].correct) {
+                    feedbackEl.innerText = 'Correto!';
+                    feedbackEl.style.color = 'green';
+                    score++;
+                } else {
+                    feedbackEl.innerText = `Errado! A resposta correta é: ${quizData[currentQuestionIndex].options[quizData[currentQuestionIndex].correct]}`;
+                    feedbackEl.style.color = 'red';
+                }
+                document.getElementById('action-btn').innerText = 'Próxima Questão';
+                isAnswered = true;
+            } else {
+                feedbackEl.innerText = 'Por favor, selecione uma resposta.';
+                feedbackEl.style.color = 'orange';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('action-btn').style.display = 'none';
+            document.getElementById('score').innerText = `Você acertou ${score} de ${quizData.length} perguntas!`;
+        }
+
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>

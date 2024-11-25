@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTBJ - Quiz Análise de Requisitos de Software</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../script.js" defer></script>
+    <style>
+        body {
+            background-color: #f8f8f8;
+        }
+        header, footer {
+            background-color: #d9534f; /* Cor igual aos botões */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .quiz-container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .options {
+            margin-bottom: 20px;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .feedback {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .score {
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #d9534f;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../img/logo_ufpi.png" alt="Logo UFPI" class="logo-ufpi">
+        </div>
+        <h1>Colégio Técnico de Bom Jesus</h1>
+        <h2>Universidade Federal do Piauí</h2>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Quiz: Introdução à Engenharia de Software</h2>
+        </div>
+    </section>
+
+    <section class="quiz-container">
+        <div id="quiz"></div>
+        <button id="action-btn" onclick="handleAction()">Confirmar Resposta</button>
+        <div id="score" class="score"></div>
+        <a href="../engenharia_de_software/disciplina_engenharia_software.html" class="back-btn">Voltar à Página Anterior</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 - Colégio Técnico de Bom Jesus (CTBJ) - UFPI</p>
+    </footer>
+
+    <script>
+
+
+const quizData = [
+    {
+        question: "O que é engenharia de software?",
+        options: [
+            "Processo de testes de software antes do lançamento.",
+            "Codificação de aplicações web.",
+            "Disciplina que abrange todas as atividades envolvidas no desenvolvimento de software de maneira sistemática, disciplinada e mensurável.",
+            "Gerenciamento de equipes de desenvolvedores."
+        ],
+        correct: 2
+    },
+    {
+        question: "Qual a importância da engenharia de software no mercado atual?",
+        options: [
+            "Garantir que sistemas sejam desenvolvidos com qualidade, dentro do prazo e do orçamento.",
+            "Reduzir o número de desenvolvedores em uma equipe.",
+            "Aumentar os custos de desenvolvimento de software.",
+            "Eliminar a necessidade de manutenção futura."
+        ],
+        correct: 0
+    },
+    {
+        question: "Quais são os principais objetivos da engenharia de software?",
+        options: [
+            "Reduzir o tempo de desenvolvimento e aumentar os custos.",
+            "Eliminar a necessidade de documentação de requisitos.",
+            "Garantir que o software seja lançado sem testes.",
+            "Criar sistemas de alta qualidade, gerenciar riscos e aumentar a eficiência do processo."
+            
+        ],
+        correct: 3
+    },
+    {
+        question: "A engenharia de software é essencial para lidar com problemas de manutenção e evolução dos sistemas.",
+        options: [
+            "Verdadeiro",
+            "Falso"
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual é a primeira etapa do processo de desenvolvimento de software?",
+        options: [
+            
+            "Design do Sistema",
+            "Implementação",
+            "Levantamento de Requisitos",
+            "Testes"
+        ],
+        correct: 2
+    },
+    {
+        question: "O que envolve a etapa de levantamento de requisitos?",
+        options: [
+            "Implementação de soluções de segurança.",
+            "Codificação do sistema.",
+            "Testes de software.",
+            "Identificação e documentação das necessidades dos usuários e stakeholders."
+        ],
+        correct: 3
+    },
+    {
+        question: "A etapa de levantamento de requisitos é importante porque erros nessa fase podem gerar retrabalho nas fases posteriores.",
+        options: [
+            "Verdadeiro",
+            "Falso"
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual é o foco da etapa de design do sistema?",
+        options: [
+            "Coletar requisitos dos stakeholders.",
+            "Realizar testes unitários.",
+            "Definir como o sistema será implementado, envolvendo arquitetura, tecnologias e interfaces.",
+            "Documentar os requisitos do sistema."
+        ],
+        correct: 2
+    },
+    {
+        question: "O design do sistema pode ser subdividido em quais partes?",
+        options: [
+            "Design arquitetural e design detalhado.",
+            "Levantamento e validação de requisitos.",
+            "Testes unitários e testes de aceitação.",
+            "Codificação e manutenção."
+        ],
+        correct: 0
+    },
+    {
+        question: "A implementação do sistema consiste em transformar o design em código de software.",
+        options: [
+            "Verdadeiro",
+            "Falso"
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual é a importância dos testes no processo de desenvolvimento de software?",
+        options: [
+            "Reduzir o número de funcionalidades do sistema.",
+            "Verificar se o software atende aos requisitos e está livre de falhas.",
+            "Eliminar a necessidade de levantamento de requisitos.",
+            "Definir a arquitetura do sistema."
+        ],
+        correct: 1
+    },
+    {
+        question: "Os testes unitários não validam componentes individuais do sistema.",
+        options: [
+            "Verdadeiro",
+            "Falso"
+        ],
+        correct: 1
+    }
+];
+
+
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let isAnswered = false;
+
+        function loadQuestion() {
+            const questionContainer = document.getElementById('quiz');
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionContainer.innerHTML = `
+                <div class="question">${currentQuestion.question}</div>
+                <div class="options">
+                    ${currentQuestion.options.map((option, index) => `
+                        <label>
+                            <input type="radio" name="option" value="${index}"> ${option}
+                        </label>
+                    `).join('')}
+                </div>
+                <div id="feedback" class="feedback"></div>
+            `;
+            document.getElementById('action-btn').innerText = 'Confirmar Resposta';
+            isAnswered = false;
+        }
+
+        function handleAction() {
+            if (!isAnswered) {
+                checkAnswer();
+            } else {
+                nextQuestion();
+            }
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            const feedbackEl = document.getElementById('feedback');
+            if (selectedOption) {
+                const answer = parseInt(selectedOption.value);
+                if (answer === quizData[currentQuestionIndex].correct) {
+                    feedbackEl.innerText = 'Correto!';
+                    feedbackEl.style.color = 'green';
+                    score++;
+                } else {
+                    feedbackEl.innerText = `Errado! A resposta correta é: ${quizData[currentQuestionIndex].options[quizData[currentQuestionIndex].correct]}`;
+                    feedbackEl.style.color = 'red';
+                }
+                document.getElementById('action-btn').innerText = 'Próxima Questão';
+                isAnswered = true;
+            } else {
+                feedbackEl.innerText = 'Por favor, selecione uma resposta.';
+                feedbackEl.style.color = 'orange';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('action-btn').style.display = 'none';
+            document.getElementById('score').innerText = `Você acertou ${score} de ${quizData.length} perguntas!`;
+        }
+
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>
